@@ -128,12 +128,19 @@
         .alert-custom { position: fixed; top: 25px; left: 50%; transform: translateX(-50%); z-index: 10010; border-radius: 50px; padding: 12px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); font-weight: 700; }
         .form-control-custom { background: #F1F3F5; border: none; border-radius: 15px; padding: 14px 18px; font-weight: 500; }
         .badge-net { background: var(--primary-light); color: var(--primary-color); font-size: 0.7rem; padding: 5px 10px; border-radius: 8px; font-weight: 800; display: inline-block; margin-top: 5px; }
+    
+        .splash-logo-img {
+    width: 500px; /* Atur lebar logo sesuai keinginan */
+    height: auto;
+    margin-bottom: 50px;
+    animation: pulse 2s infinite; /* Tetap menggunakan animasi pulse yang sudah ada */
+}
     </style>
 </head>
 <body>
 
     <div id="splashScreen">
-        <div class="splash-logo">beresin</div>
+        <img src="assets/logopanjang.png" alt="Logo Beresin" class="splash-logo-img">
         <div class="spinner-border text-light mt-4" style="width: 3rem; height: 3rem;"></div>
     </div>
 
@@ -384,36 +391,15 @@
             { id: 19, name: "Dina Rahmawati", wa: "0880-3540-3450", rating: 4.6, photo: "assets/DinaRahmawati.jpg", review: "Sangat detail dan telaten." },
             { id: 20, name: "Elina Natalia", wa: "0895-3390-0066", rating: 4.9, photo: "assets/ElinaNatalia.jpg", review: "Sangat jujur dan sopan." },
             { id: 21, name: "Eliza Natalia", wa: "0847-5523-1411", rating: 4.8, photo: "assets/ElizaNatalia.jpg", review: "Profesional dan rapi." },
-            { id: 22, name: "Fitri Handayani", wa: "0885-6532-7485", rating: 4.8, photo: "assets/FitriaHandayani.jpg", review: "Hasil sesuai ekspektasi." },
+            { id: 22, name: "Fitri Handayani", wa: "0885-6532-7485", rating: 4.8, photo: "assets/FitriaHandayani", review: "Hasil sesuai ekspektasi." },
             { id: 23, name: "Haris Fadillah", wa: "0865-6932-4215", rating: 4.6, photo: "assets/HarisFadillah.jpg", review: "Cukup baik." },
             { id: 24, name: "Hendra Wijaya", wa: "0821-3652-1425", rating: 4.9, photo: "assets/HendraWijaya.jpg", review: "Deep cleaning sangat maksimal." },
             { id: 25, name: "Imam Maulana", wa: "0836-9874-2547", rating: 4.6, photo: "assets/ImamMaulana.jpg", review: "Pelayanan oke." },
             { id: 26, name: "Joko Susilo", wa: "0814-3982-4561", rating: 4.8, photo: "assets/JokoSusilo.jpg", review: "Kerja Cepat." },
             { id: 27, name: "Kirana Ayu", wa: "0880-1122-3365", rating: 4.7, photo: "assets/KiranaAyu.jpg", review: "Telaten dan ramah." },
             { id: 28, name: "Lilis Kartika", wa: "0888-5578-9999", rating: 4.9, photo: "assets/LilisKartika.jpg", review: "Deep cleaning terbaik." },
-            { id: 29, name: "Lina Oktaviani", wa: "0811-5555-1478", rating: 4.7, photo: "assets/LinaOktavinani.jpg", review: "Pelayanan sopan dan ramah." },
+            { id: 29, name: "Lina Oktaviani", wa: "0811-5555-1478", rating: 4.7, photo: "assets/Lina Oktavinani.jpg", review: "Pelayanan sopan dan ramah." },
             { id: 30, name: "Melati Purnomo", wa: "0866-2222-8888", rating: 4.8, photo: "assets/MelatiPurnomo.jpg", review: "Sangat bersih." },
-            { id: 31, name: "Mutiara Putri", wa: "0812-3232-8976", rating: 4.8, photo: "assets/MutiaraPutri.jpg", review: "Kerja Cepat." },
-            { id: 32, name: "Nabila Zahra", wa: "0812-1112-8966", rating: 4.5, photo: "assets/NabilaZahra.jpg", review: "Profesional." },
-            { id: 33, name: "Naufal Rizky", wa: "0812-3232-1966", rating: 4.7, photo: "assets/NaufalRizky.jpg", review: "Hasil Sesuai Ekspetasi." },
-            { id: 34, name: "Nia Anggraini", wa: "0812-3232-1166", rating: 4.7, photo: "assets/NiaAnggraini.jpg", review: "Detail dan Rapi." },
-            { id: 35, name: "Nur Hidayah", wa: "0811-2232-8966", rating: 4.9, photo: "assets/NurHidayah.jpg", review: "Kerja Bersih." },
-            { id: 36, name: "Purwanto", wa: "0812-7777-8966", rating: 4.7, photo: "assets/Purwanto.jpg", review: "Pelayanan Sangat Baik." },
-            { id: 37, name: "Rafi Akbar", wa: "0812-6666-8966", rating: 4.6, photo: "assets/RafiAkbar.jpg", review: "Cukup Rapi." },
-            { id: 38, name: "Rahma Safitri", wa: "0812-7777-9999", rating: 4.7, photo: "assets/RahmaSafitri.jpg", review: "Sangat Teliti." },
-            { id: 39, name: "Rina Marlina", wa: "0812-7777-7777", rating: 4.7, photo: "assets/RinaMarlina.jpg", review: "Profesional." },
-            { id: 40, name: "Robi Kurniawan", wa: "0812-1234-8966", rating: 4.7, photo: "assets/RobiKurniawan.jpg", review: "Kerja Rapi." },
-            { id: 41, name: "Saputri", wa: "0895-392-8995", rating: 4.6, photo: "assets/Saputri.jpg", review: "Sangat jujur dan sopan." },
-            { id: 42, name: "Sarah Amelia", wa: "0890-3595-5000", rating: 4.9, photo: "assets/SarahAmelia.jpg", review: "Profesional dan rapi." },
-            { id: 43, name: "Stefani Wijaya", wa: "0895-0010-5002", rating: 4.8, photo: "assets/ElinaNatalia.jpg", review: "Sangat jujur dan sopan." },
-            { id: 44, name: "Team Cleaning + laundry", wa: "0895-1011-5102", rating: 4.8, photo: "assets/teamclean+laundry", review: "Hasil Sesuai Ekspektasi." },
-            { id: 45, name: "Team Setrika dan Pel", wa: "0895-1102-5672", rating: 4.9, photo: "assets/TeamSertrikadanPel.jpg", review: "Sangat jujur dan sopan." },
-            { id: 46, name: "Teguh Santika", wa: "0895-2345-6000", rating: 4.6, photo: "assets/TeguhSantika.jpg", review: "Profesional dan wangi." },
-            { id: 47, name: "Wahyu Purwanti", wa: "0885-3005-2567", rating: 4.7, photo: "assets/EWahyuPurwanti.jpg", review: "Bersih dan wangi." },
-            { id: 48, name: "Yoga Prasetyo", wa: "0890-1234-4567", rating: 4.9, photo: "assets/YogaPrasetyo.jpg", review: "Jujur dan sopan." },
-            { id: 49, name: "Yuni Lestari", wa: "0878-9868-5432", rating: 4.6, photo: "assets/YuniLestari.jpg", review: "Profesional dan telaten." },
-            { id: 50, name: "Yusuf Ramli", wa: "0855-4658-9925", rating: 4.8, photo: "assets/YusufRamli.jpg", review: "Bersih, rapi dan wangi." },
-            { id: 51, name: "Team Kebun", wa: "0855-4590-2409", rating: 4.9, photo: "assets/TeamKebun.jpg", review: "Bersih, rapi dan kompeten." }
         ];
 
         let selectedService = "", currentPrice = 0, isBundling = false, ratingTargetId = null, curRateValue = 0;
