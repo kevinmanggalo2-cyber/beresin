@@ -1,4 +1,4 @@
-const CACHE_NAME = "reservin-v1";
+const CACHE_NAME = "beresin-v1";
 const BASE_URL = self.registration.scope;
 
 const urlsToCache = [
