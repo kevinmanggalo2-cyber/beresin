@@ -12,12 +12,12 @@
   "lang": "id",
   "icons": [
     {
-      "src": "assets/logoberesin192.png",
+      "src": "assets/192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/logoberesing512.png",
+      "src": "assets/512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
@@ -30,7 +30,7 @@
       "url": "./index.html",
       "icons": [
         {
-          "src": "assets/logoberesin192.png",
+          "src": "assets/192.png",
           "sizes": "192x192"
         }
       ]
