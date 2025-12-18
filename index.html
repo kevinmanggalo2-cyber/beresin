@@ -190,7 +190,7 @@
             </div>
             
             <div class="banner-slider" id="bannerSlider">
-                <div class="banner-slide active" style="background: linear-gradient(135deg, #24A4FF, #9FD7FF);"><img src="assets/slide iklan voucher.png" style="width: 50%;"></div>
+                <div class="banner-slide active" style="background: url('assets/') center/cover no-repeat; width: 50%; height: 400px;"></div>
                 <div class="banner-slide" style="background: linear-gradient(135deg, #FF6B6B, #FF8E8E);"><h3>Rumah Kinclong<br><small style="font-size: 0.8rem;">Mulai dari Rp 35rb!</small></h3></div>
             </div>
 
@@ -363,8 +363,11 @@
         let currentLang = localStorage.getItem('lang') || 'id';
 
         const workers = [
-            { id: 1, name: "Siti Aminah", wa: "0812-3344-5566", rating: 4.9, photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop", review: "Sangat teliti & rapi kerjanya." },
-            { id: 2, name: "Budi Santoso", wa: "0877-1122-3344", rating: 4.8, photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop", review: "Sangat jujur dan sopan." }
+            { id: 1, name: "Andi Pratama", wa: "0812-3344-5566", rating: 4.9, photo: "assets/pembantu1.jpg", review: "Sangat teliti & rapi kerjanya." },
+            { id: 2, name: "Budi Santosa", wa: "0877-1122-3344", rating: 4.8, photo: "assets/pembantu2.jpg", review: "Sangat jujur dan sopan." },
+            { id: 3, name: "Rizky Maulana", wa: "0812-3344-4477", rating: 4.5, photo: "assets/pembantu11.jpg", review: "Sangat kompeten dan telaten." },
+            { id: 4, name: "Agus Firmansyah", wa: "0812-3344-9876", rating: 4.6, photo: "assets/pembantu12.jpg", review: "Kerja cepat dan rumah jadi bersih." },
+            { id: 5, name: "Deni Kurniawam", wa: "0812-3344-5557", rating: 4.9, photo: "assets/pembantu13.jpg", review: "Kerja sopan dan detail." }
         ];
 
         let selectedService = "", currentPrice = 0, isBundling = false, ratingTargetId = null, curRateValue = 0;
