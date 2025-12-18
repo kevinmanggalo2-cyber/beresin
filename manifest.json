@@ -1,0 +1,43 @@
+{
+  "id": "./",
+  "name": "beresin - Tinggal Klik, Langsung Beres",
+  "short_name": "beresin",
+  "description": "Aplikasi layanan cleaning service online yang memudahkan pengguna memesan jasa kebersihan hanya melalui smartphone",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03A6A6",
+  "orientation": "portrait",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "logo/logo6.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo/logo5.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+ 
+  "shortcuts": [
+    {
+      "name": "Buka Beranda",
+      "short_name": "Home",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "logo/logo6.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "productivity",
+    "utilities"
+  ]
+}
