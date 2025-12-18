@@ -2,1484 +2,501 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beresin - Jasa Kebersihan Profesional</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts - Poppins -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Anime.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="#" id="manifestLink">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#24A4FF">
+    <meta name="description" content="Beresin - Aplikasi Layanan Kebersihan Profesional">
+    <title>Beresin - Solusi Bersih Profesional</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-color: #24A4FF;
+            --primary-dark: #1d8ce0;
+            --primary-light: #e3f2fd;
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --text-main: #1A1A1A;
+            --text-sub: #757575;
+            --border-color: #dee2e6;
+            --danger-color: #FF4D4D;
+            --success-color: #28a745;
         }
-        
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --text-main: #FFFFFF;
+            --text-sub: #B0B0B0;
+            --border-color: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding-bottom: 80px;
         }
-        
-        :root {
-            --biru-muda: #9FD7FF;
-            --biru-tua: #24A4FF;
-            --putih: #FFFFFF;
-            --abu-muda: #6c757d;
+
+        /* Splash Screen */
+        #splashScreen {
+            position: fixed; inset: 0; background: var(--primary-color);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10000; color: white; transition: 0.8s ease;
         }
-        
-        /* Header */
-        .app-header {
-            background: linear-gradient(135deg, var(--biru-tua), #1a8ee8);
-            color: white;
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-        
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        
-        /* Main Content */
-        .main-content {
-            margin-top: 70px;
-            padding: 20px;
-            min-height: calc(100vh - 150px);
-        }
-        
-        /* Promo Slider */
-        .promo-slider {
-            margin-bottom: 25px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .promo-slide {
-            background: linear-gradient(135deg, var(--biru-muda), var(--biru-tua));
-            padding: 40px 20px;
-            text-align: center;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .promo-slide:hover {
-            transform: scale(1.02);
-        }
-        
-        .promo-code {
-            background: white;
-            color: var(--biru-tua);
-            padding: 8px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin-top: 10px;
-            font-weight: 600;
-        }
-        
-        /* Service Cards */
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-        }
-        
-        .service-icon {
-            font-size: 40px;
-            color: var(--biru-tua);
-            margin-bottom: 15px;
-        }
-        
-        .service-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .service-desc {
-            font-size: 14px;
-            color: var(--abu-muda);
-            margin-bottom: 10px;
-        }
-        
-        .service-info {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            font-size: 13px;
-        }
-        
-        .service-time {
-            color: var(--abu-muda);
-        }
-        
-        .service-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--biru-tua);
-        }
-        
-        .btn-pesan {
-            background: var(--biru-tua);
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 25px;
-            width: 100%;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-pesan:hover {
-            background: #1a8ee8;
-            transform: scale(1.05);
-        }
-        
-        /* Bundle Package Badge */
-        .bundle-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ff8787);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-        
-        /* Bottom Navigation */
+        .splash-logo { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* Navigation */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05); display: flex; justify-content: space-around;
+            padding: 10px 0 15px 0; z-index: 1000; border-top: 1px solid var(--border-color);
         }
+        .nav-item { text-align: center; color: var(--text-sub); cursor: pointer; text-decoration: none; flex: 1; transition: 0.3s; }
+        .nav-item.active { color: var(--primary-color); }
+        .nav-item i { font-size: 1.5rem; display: block; margin-bottom: 2px; transition: 0.3s; }
+        .nav-item.active i { transform: translateY(-3px); }
+        .nav-item span { font-size: 0.65rem; font-weight: 600; }
+
+        /* Page Content */
+        .page-content { display: none; min-height: 100vh; }
+        .page-content.active { display: block; animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Components */
+        .banner-slider { position: relative; height: 160px; border-radius: 24px; overflow: hidden; margin: 1rem; box-shadow: 0 10px 25px rgba(36,164,255,0.2); }
+        .banner-slide { position: absolute; inset: 0; opacity: 0; transition: 0.8s; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; text-align: center; padding: 25px; }
+        .banner-slide.active { opacity: 1; }
+
+        /* Voucher System */
+        .voucher-section { padding: 0 1rem; margin-bottom: 1.5rem; }
+        .voucher-container { display: flex; overflow-x: auto; gap: 12px; padding: 10px 0; scrollbar-width: none; }
+        .voucher-container::-webkit-scrollbar { display: none; }
+        .voucher-card {
+            min-width: 160px; background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            color: white; padding: 15px; border-radius: 18px; border: none;
+            position: relative; overflow: hidden;
+        }
+        .voucher-card.blue { background: linear-gradient(135deg, #24A4FF, #9FD7FF); }
+        .voucher-card h6 { font-weight: 800; margin-bottom: 2px; }
+        .voucher-card small { font-size: 0.7rem; opacity: 0.9; }
+
+        /* Grid */
+        .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 1rem 1rem 1rem; }
+        .service-item {
+            text-align: center; padding: 18px 10px; background: var(--card-bg); border-radius: 22px;
+            border: 1px solid var(--border-color); cursor: pointer; transition: 0.3s;
+        }
+        .service-item:active { transform: scale(0.9); background: var(--primary-light); }
+        .service-item i { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 8px; display: block; }
+        .service-item small { font-weight: 700; font-size: 0.75rem; color: var(--text-main); }
+
+        /* Worker Cards */
+        .worker-card {
+            background: var(--card-bg); border-radius: 24px; padding: 16px; margin-bottom: 15px;
+            border: 1px solid var(--border-color); display: flex; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: 0.3s;
+        }
+        .worker-img { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; margin-right: 18px; border: 3px solid var(--primary-light); }
+        .worker-info h6 { font-weight: 700; margin-bottom: 3px; font-size: 1rem; }
         
-        .nav-item {
-            text-align: center;
-            color: var(--abu-muda);
-            cursor: pointer;
-            padding: 5px 15px;
-            transition: all 0.3s;
-            flex: 1;
-        }
-        
-        .nav-item.active {
-            color: var(--biru-tua);
-        }
-        
-        .nav-item i {
-            font-size: 24px;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .nav-item span {
-            font-size: 12px;
-        }
-        
-        /* Auth Pages */
-        .auth-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .auth-logo h1 {
-            color: var(--biru-tua);
-            font-size: 36px;
-            font-weight: 700;
-        }
-        
-        /* Order Form */
-        .checkout-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-        
-        .step {
-            flex: 1;
-            text-align: center;
-            padding: 10px;
-            background: #e9ecef;
-            position: relative;
-        }
-        
-        .step.active {
-            background: var(--biru-tua);
-            color: white;
-        }
-        
-        .order-summary {
-            background: var(--biru-muda);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        
-        /* Profile Page */
-        .profile-header {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, var(--biru-tua), #1a8ee8);
-            color: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 40px;
-            color: var(--biru-tua);
-        }
-        
-        /* Order History */
-        .order-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-        
-        .order-status {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .status-process {
-            background: #cfe2ff;
-            color: #084298;
-        }
-        
-        .status-completed {
-            background: #d1e7dd;
-            color: #0f5132;
-        }
-        
-        .status-cancelled {
-            background: #f8d7da;
-            color: #842029;
-        }
-        
-        /* Rating Stars */
-        .rating-stars {
-            color: #ffc107;
-            font-size: 18px;
-        }
-        
-        .rating-input {
-            display: inline-flex;
-            gap: 5px;
-            font-size: 30px;
-            cursor: pointer;
-        }
-        
-        .rating-input i {
-            color: #ddd;
-            transition: color 0.2s;
-        }
-        
-        .rating-input i.active {
-            color: #ffc107;
-        }
-        
-        /* Modal Customization */
-        .modal-content {
-            border-radius: 15px;
-        }
-        
-        .modal-header {
-            background: var(--biru-tua);
-            color: white;
-            border-radius: 15px 15px 0 0;
-        }
-        
-        /* Loading Animation */
-        .loading {
-            text-align: center;
-            padding: 50px;
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--biru-tua);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Hidden class */
-        .d-none {
-            display: none !important;
-        }
-        
-        /* Payment Methods */
-        .payment-method {
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .payment-method:hover {
-            border-color: var(--biru-tua);
-        }
-        
-        .payment-method.active {
-            border-color: var(--biru-tua);
-            background: var(--biru-muda);
-        }
+        /* Chatbot UI */
+        #chatbot-trigger { position: fixed; bottom: 90px; right: 20px; width: 60px; height: 60px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; box-shadow: 0 8px 25px rgba(36,164,255,0.4); z-index: 999; cursor: pointer; }
+        #chatbot-window { position: fixed; bottom: 160px; right: 20px; width: 320px; height: 450px; background: var(--card-bg); border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 10001; display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); }
+        .chat-header { background: var(--primary-color); color: white; padding: 18px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #fcfcfc; }
+        .chat-bubble { padding: 10px 14px; border-radius: 18px; max-width: 85%; font-size: 0.85rem; line-height: 1.4; }
+        .chat-bubble.bot { background: #E9ECEF; color: #333; border-bottom-left-radius: 4px; align-self: flex-start; }
+        .chat-bubble.user { background: var(--primary-color); color: white; border-bottom-right-radius: 4px; align-self: flex-end; }
+        .chat-footer { padding: 12px; display: flex; gap: 8px; background: var(--card-bg); border-top: 1px solid var(--border-color); }
+
+        /* Modals */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10005; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
+        .modal-overlay.active { display: flex; }
+        .modal-content-custom { background: var(--card-bg); border-radius: 35px; padding: 30px; width: 92%; max-width: 450px; max-height: 85vh; overflow-y: auto; }
+
+        .alert-custom { position: fixed; top: 25px; left: 50%; transform: translateX(-50%); z-index: 10010; border-radius: 50px; padding: 12px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); font-weight: 700; }
+        .form-control-custom { background: #F1F3F5; border: none; border-radius: 15px; padding: 14px 18px; font-weight: 500; }
+        .badge-net { background: var(--primary-light); color: var(--primary-color); font-size: 0.7rem; padding: 5px 10px; border-radius: 8px; font-weight: 800; display: inline-block; margin-top: 5px; }
     </style>
 </head>
 <body>
-    
-    <!-- Auth Pages -->
-    <div id="authPage" class="d-none">
-        <div class="auth-container">
-            <div class="auth-logo">
-                <h1>BERESIN</h1>
-                <p class="text-muted">Jasa Kebersihan Profesional</p>
-            </div>
-            
-            <!-- Login Form -->
-            <div id="loginForm">
-                <h4 class="mb-4">Masuk ke Akun</h4>
-                <form id="loginFormElement">
+
+    <div id="splashScreen">
+        <div class="splash-logo">Beresin</div>
+        <div class="spinner-border text-light mt-4" style="width: 3rem; height: 3rem;"></div>
+    </div>
+
+    <div id="loginPage" class="page-content active">
+        <div class="p-4 d-flex align-items-center justify-content-center" style="min-height: 100vh; background: var(--primary-color);">
+            <div class="bg-white p-4 rounded-5 shadow-lg w-100" style="max-width: 400px;">
+                <h2 class="text-center fw-bold text-primary mb-4" id="lang-login-title">Masuk</h2>
+                <form id="loginForm">
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="loginEmail" required>
+                        <label class="small fw-bold mb-1">Email</label>
+                        <input type="email" id="loginEmail" class="form-control form-control-custom" placeholder="Masukkan email..." required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="loginPassword" required>
+                    <div class="mb-4">
+                        <label class="small fw-bold mb-1">Password</label>
+                        <input type="password" id="loginPass" class="form-control form-control-custom" placeholder="Masukkan password..." required>
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Ingat Saya</label>
-                    </div>
-                    <button type="submit" class="btn btn-pesan mb-3">Masuk</button>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold py-3 rounded-4 shadow">Masuk Sekarang</button>
+                    <p class="text-center mt-3 small" id="lang-no-acc">Belum punya akun? <a href="#" onclick="navigateTo('register')" class="fw-bold text-decoration-none">Daftar Akun</a></p>
                 </form>
-                <p class="text-center">Belum punya akun? <a href="#" id="showRegister" style="color: var(--biru-tua);">Daftar</a></p>
-            </div>
-            
-            <!-- Register Form -->
-            <div id="registerForm" class="d-none">
-                <h4 class="mb-4">Buat Akun Baru</h4>
-                <form id="registerFormElement">
-                    <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="registerName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="registerEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password (min. 6 karakter)</label>
-                        <input type="password" class="form-control" id="registerPassword" required minlength="6">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nomor Telepon</label>
-                        <input type="tel" class="form-control" id="registerPhone" required>
-                    </div>
-                    <button type="submit" class="btn btn-pesan mb-3">Daftar</button>
-                </form>
-                <p class="text-center">Sudah punya akun? <a href="#" id="showLogin" style="color: var(--biru-tua);">Masuk</a></p>
             </div>
         </div>
     </div>
-    
-    <!-- Main App -->
-    <div id="mainApp" class="d-none">
-        <!-- Header -->
-        <div class="app-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="logo-text">BERESIN</div>
-                <i class="fas fa-bell" style="font-size: 20px; cursor: pointer;"></i>
+
+    <div id="registerPage" class="page-content">
+        <div class="p-4 d-flex align-items-center justify-content-center" style="min-height: 100vh; background: var(--primary-color);">
+            <div class="bg-white p-4 rounded-5 shadow-lg w-100" style="max-width: 400px;">
+                <h3 class="text-center fw-bold text-primary mb-3" id="lang-reg-title">Daftar Akun Baru</h3>
+                <form id="regForm">
+                    <div class="mb-2"><input type="text" id="regName" class="form-control form-control-custom" placeholder="Nama Lengkap" required></div>
+                    <div class="mb-2"><input type="tel" id="regPhone" class="form-control form-control-custom" placeholder="Nomor WhatsApp" required></div>
+                    <div class="mb-2"><textarea id="regAddress" class="form-control form-control-custom" placeholder="Alamat Lengkap Rumah" rows="2" required></textarea></div>
+                    <div class="mb-2"><input type="email" id="regEmail" class="form-control form-control-custom" placeholder="Alamat Email" required></div>
+                    <div class="mb-3"><input type="password" id="regPass" class="form-control form-control-custom" placeholder="Kata Sandi (Password)" required></div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold py-3 rounded-4 shadow">Daftar Sekarang</button>
+                    <p class="text-center mt-3 small" id="lang-have-acc">Sudah ada akun? <a href="#" onclick="navigateTo('login')" class="fw-bold text-decoration-none">Masuk</a></p>
+                </form>
             </div>
         </div>
+    </div>
+
+    <div id="appContainer" style="display:none;">
         
-        <!-- Main Content -->
-        <div class="main-content" id="mainContent"></div>
-        
-        <!-- Bottom Navigation -->
+        <div id="homePage" class="page-content">
+            <div class="p-3 d-flex justify-content-between align-items-center bg-white sticky-top shadow-sm">
+                <div><h4 class="fw-bold m-0 text-primary">Beresin</h4><small id="userNameDisplay" class="text-muted"></small></div>
+                <div class="d-flex gap-2">
+                    <i class="bi bi-bell-fill text-primary fs-4"></i>
+                </div>
+            </div>
+            
+            <div class="banner-slider" id="bannerSlider">
+                <div class="banner-slide active" style="background: linear-gradient(135deg, #24A4FF, #9FD7FF);"><h3>Voucher Spesial 5%<br><small style="font-size: 0.8rem;">Gunakan kode: BERSIH5</small></h3></div>
+                <div class="banner-slide" style="background: linear-gradient(135deg, #FF6B6B, #FF8E8E);"><h3>Rumah Kinclong<br><small style="font-size: 0.8rem;">Mulai dari Rp 35rb!</small></h3></div>
+            </div>
+
+            <div class="voucher-section">
+                <h6 class="fw-bold mb-2">Pusat Voucher Promo</h6>
+                <div class="voucher-container">
+                    <div class="voucher-card"><h6>BERSIH5</h6><small>Diskon 5%</small></div>
+                    <div class="voucher-card blue"><h6>HEMAT10</h6><small>Potongan 10rb</small></div>
+                    <div class="voucher-card"><h6>NEWUSER</h6><small>Khusus Member</small></div>
+                    <div class="voucher-card blue"><h6>CASHBACK</h6><small>Koin Beresin</small></div>
+                    <div class="voucher-card"><h6>Kinclong</h6><small>Spesial Toilet</small></div>
+                </div>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-item" onclick="openService('Deep Clean', 100000, false)"><i class="bi bi-house-heart"></i><small id="lang-deep">Deep Clean</small></div>
+                <div class="service-item" onclick="openService('Sapu Pel', 40000, false)"><i class="bi bi-broom"></i><small id="lang-sweep">Sapu Pel</small></div>
+                <div class="service-item" onclick="openService('Toilet', 60000, false)"><i class="bi bi-droplet"></i><small id="lang-toilet">Toilet</small></div>
+                <div class="service-item" onclick="openService('Laundry', 50000, false)"><i class="bi bi-basket"></i><small id="lang-laundry">Laundry</small></div>
+                <div class="service-item" onclick="openService('Setrika', 35000, false)"><i class="bi bi-steam"></i><small id="lang-iron">Setrika</small></div>
+                <div class="service-item" onclick="navigateTo('categoryOthers')"><i class="bi bi-grid-fill"></i><small id="lang-others">Lainnya</small></div>
+            </div>
+
+            <div class="px-3 pb-3">
+                <h6 class="fw-bold mb-3" id="lang-tips-title">Tips Kebersihan</h6>
+                <div class="card p-3 border-0 shadow-sm rounded-4 mb-2">
+                    <h6 class="m-0 fw-bold" style="font-size: 0.9rem;">Wastafel Mengkilap</h6>
+                    <p class="small text-muted m-0">Gosok dengan kulit jeruk nipis dan garam untuk hasil maksimal.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="categoryOthersPage" class="page-content">
+            <div class="p-3 bg-white border-bottom sticky-top shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('home')"><i class="bi bi-arrow-left"></i> Kembali</button><h5 class="fw-bold mt-2">Spesialis Lainnya</h5></div>
+            <div class="service-grid">
+                <div class="service-item" onclick="openService('Cuci AC', 75000, false)"><i class="bi bi-wind"></i><small>Cuci AC</small></div>
+                <div class="service-item" onclick="openService('Taman', 80000, false)"><i class="bi bi-tree"></i><small>Taman</small></div>
+                <div class="service-item" onclick="openService('Fogging', 120000, false)"><i class="bi bi-bug"></i><small>Fogging</small></div>
+            </div>
+        </div>
+
+        <div id="servicePage" class="page-content">
+            <div class="p-3 bg-white border-bottom sticky-top shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('home')">Kembali</button><h5 id="selectedServiceTitle" class="fw-bold mt-2">Pilih Petugas Kami</h5></div>
+            <div id="workerList" class="p-3"></div>
+        </div>
+
+        <div id="packagePage" class="page-content">
+            <div class="p-3 bg-white shadow-sm border-bottom sticky-top"><h5 class="fw-bold m-0" id="lang-pack-title">5 Paket Bundling Hemat</h5></div>
+            <div class="p-3">
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Deep Clean + Laundry', 120000, true)" style="cursor:pointer">
+                    <div class="text-start"><h6>Deep Clean + Laundry</h6><span class="badge-net">Hemat 30rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 120k</span>
+                </div>
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Setrika + Sapu Pel', 60000, true)" style="cursor:pointer">
+                    <div class="text-start"><h6>Setrika + Sapu Pel</h6><span class="badge-net">Hemat 15rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 60k</span>
+                </div>
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Cuci AC + Toilet', 110000, true)" style="cursor:pointer">
+                    <div class="text-start"><h6>Cuci AC + Toilet</h6><span class="badge-net">Hemat 25rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 110k</span>
+                </div>
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Dapur + Kamar Mandi', 100000, true)" style="cursor:pointer">
+                    <div class="text-start"><h6>Dapur + Kamar Mandi</h6><span class="badge-net">Hemat 20rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 100k</span>
+                </div>
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Full House Clean', 250000, true)" style="cursor:pointer">
+                    <div class="text-start"><h6>Full House Clean</h6><span class="badge-net">Hemat 100rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 250k</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="transactionPage" class="page-content">
+            <div class="p-3 bg-white shadow-sm border-bottom sticky-top"><h5 class="fw-bold m-0" id="lang-trans-title">Riwayat Pesanan</h5></div>
+            <div id="transList" class="p-3"></div>
+        </div>
+
+        <div id="profilePage" class="page-content">
+            <div class="p-3 border-bottom bg-white shadow-sm sticky-top"><h5 class="fw-bold m-0" id="lang-profile-title">Akun Saya</h5></div>
+            <div class="p-4 text-center">
+                <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 80px; height: 80px;"><i class="bi bi-person-circle fs-1"></i></div>
+                <h5 id="profileNameDisplay" class="fw-bold mt-2 m-0">User</h5>
+                <small id="profilePhoneDisplay" class="text-muted d-block mb-4"></small>
+                
+                <div class="list-group text-start shadow-sm rounded-4 overflow-hidden border-0">
+                    <button class="list-group-item list-group-item-action py-3 border-0" onclick="navigateTo('editProfile')"><i class="bi bi-pencil-square me-3 text-primary"></i> <span id="lang-edit-prof">Ubah Profil</span></button>
+                    <button class="list-group-item list-group-item-action py-3 border-0" onclick="navigateTo('address')"><i class="bi bi-geo-alt-fill me-3 text-primary"></i> <span id="lang-addr-me">Alamat Saya</span></button>
+                    <button class="list-group-item list-group-item-action py-3 border-0" onclick="navigateTo('settings')"><i class="bi bi-gear-fill me-3 text-primary"></i> <span id="lang-settings">Pengaturan</span></button>
+                    <button class="list-group-item list-group-item-action py-3 border-0" onclick="navigateTo('help')"><i class="bi bi-headset-fill me-3 text-primary"></i> <span id="lang-help">Bantuan & Hubungi CS</span></button>
+                    <button class="list-group-item list-group-item-action py-3 border-0 text-danger" onclick="handleLogout()"><i class="bi bi-box-arrow-right me-3"></i> <span id="lang-logout">Keluar</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="addressPage" class="page-content">
+            <div class="p-3 bg-white border-bottom shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('profile')">Kembali</button><h5 class="fw-bold mt-2">Daftar Alamat</h5></div>
+            <div class="p-3"><div id="addressList"></div><div class="mt-3"><label class="small fw-bold">Tambah Alamat Baru</label><textarea id="newAddrInput" class="form-control form-control-custom mb-2" rows="2" placeholder="Masukkan alamat..."></textarea><button class="btn btn-primary w-100 rounded-pill py-2" onclick="saveNewAddress()">Simpan</button></div></div>
+        </div>
+
+        <div id="settingsPage" class="page-content">
+            <div class="p-3 bg-white border-bottom shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('profile')">Kembali</button><h5 class="fw-bold mt-2">Pengaturan</h5></div>
+            <div class="p-3">
+                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4">
+                    <h6>Pilih Bahasa / Language</h6>
+                    <div class="d-flex justify-content-between mb-2"><span>Indonesia</span><input type="radio" name="lang" id="langId" onchange="changeLang('id')"></div>
+                    <div class="d-flex justify-content-between"><span>English</span><input type="radio" name="lang" id="langEn" onchange="changeLang('en')"></div>
+                </div>
+                <div class="card p-3 border-0 shadow-sm rounded-4">Mode Gelap (Dark Mode) <div class="form-check form-switch float-end"><input class="form-check-input" type="checkbox" id="themeSwitch" onchange="toggleTheme()"></div></div>
+            </div>
+        </div>
+
+        <div id="editProfilePage" class="page-content">
+            <div class="p-3 bg-white border-bottom shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('profile')">Kembali</button><h5 class="fw-bold mt-2">Ubah Data Profil</h5></div>
+            <div class="p-3"><form id="editForm"><label class="small fw-bold">Nama</label><input type="text" id="editName" class="form-control form-control-custom mb-2"><label class="small fw-bold">WhatsApp</label><input type="tel" id="editPhone" class="form-control form-control-custom mb-3"><button type="submit" class="btn btn-primary w-100 fw-bold py-2 rounded-3">Simpan Perubahan</button></form></div>
+        </div>
+
+        <div id="helpPage" class="page-content">
+            <div class="p-3 bg-white border-bottom shadow-sm"><button class="btn btn-sm btn-light rounded-pill px-3" onclick="navigateTo('profile')">Kembali</button><h5 class="fw-bold mt-2">Hubungi CS</h5></div>
+            <div class="p-3">
+                <a href="https://wa.me/628123456789" class="card p-3 mb-3 border-0 shadow-sm rounded-4 text-decoration-none d-flex align-items-center"><i class="bi bi-whatsapp fs-2 text-success me-3"></i><div><h6 class="m-0 fw-bold text-dark">WhatsApp Admin</h6><small class="text-muted">Aktif 24 Jam</small></div></a>
+                <a href="mailto:support@beresin.id" class="card p-3 mb-3 border-0 shadow-sm rounded-4 text-decoration-none d-flex align-items-center"><i class="bi bi-envelope fs-2 text-primary me-3"></i><div><h6 class="m-0 fw-bold text-dark">Email Support</h6><small class="text-muted">Layanan Teknis</small></div></a>
+            </div>
+        </div>
+
         <div class="bottom-nav">
-            <div class="nav-item active" data-page="home">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </div>
-            <div class="nav-item" data-page="layanan">
-                <i class="fas fa-th-large"></i>
-                <span>Layanan</span>
-            </div>
-            <div class="nav-item" data-page="pesanan">
-                <i class="fas fa-receipt"></i>
-                <span>Pesanan</span>
-            </div>
-            <div class="nav-item" data-page="profile">
-                <i class="fas fa-user"></i>
-                <span>Profile</span>
-            </div>
+            <div class="nav-item active" id="nav-home" onclick="navigateTo('home')"><i class="bi bi-house-door-fill"></i><span>Beranda</span></div>
+            <div class="nav-item" id="nav-package" onclick="navigateTo('package')"><i class="bi bi-box-seam-fill"></i><span>Paket</span></div>
+            <div class="nav-item" id="nav-transaction" onclick="navigateTo('transaction')"><i class="bi bi-receipt-cutoff"></i><span>Pesanan</span></div>
+            <div class="nav-item" id="nav-profile" onclick="navigateTo('profile')"><i class="bi bi-person-fill"></i><span>Profil</span></div>
         </div>
     </div>
-    
-    <!-- Modals -->
-    <!-- Promo Modal -->
-    <div class="modal fade" id="promoModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Kode Promo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body text-center" id="promoModalBody"></div>
-            </div>
+
+    <div id="chatbot-trigger" onclick="toggleChat()"><i class="bi bi-chat-dots-fill"></i></div>
+    <div id="chatbot-window">
+        <div class="chat-header"><span>Beresin Bot</span><i class="bi bi-x-lg" onclick="toggleChat()" style="cursor:pointer"></i></div>
+        <div class="chat-body" id="chatContent">
+            <div class="chat-bubble bot">Halo! Saya asisten Beresin. Ada yang bisa saya bantu terkait layanan kami?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" class="form-control rounded-pill border-0 bg-light" placeholder="Ketik bantuan...">
+            <button class="btn btn-primary rounded-circle" onclick="sendChat()"><i class="bi bi-send"></i></button>
         </div>
     </div>
-    
-    <!-- Chat CS Modal -->
-    <div class="modal fade" id="chatModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="fas fa-headset"></i> Customer Service</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="chatBody" style="height: 400px; overflow-y: auto;">
-                    <div class="alert alert-info">
-                        <strong>CS Beresin:</strong> Halo! Ada yang bisa kami bantu?
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="text" class="form-control" id="chatInput" placeholder="Ketik pesan...">
-                    <button class="btn btn-pesan" onclick="sendChat()">Kirim</button>
-                </div>
-            </div>
+
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content-custom shadow-lg">
+            <div class="d-flex justify-content-between mb-3"><h5 class="fw-bold m-0">Checkout</h5><button class="btn-close" onclick="closeModal('bookingModal')"></button></div>
+            <div id="workerDetail" class="mb-3 p-3 bg-light rounded-4 small"></div>
+            
+            <div class="mb-3"><label class="small fw-bold">Jadwal Kedatangan</label><div class="d-flex gap-2 mt-1"><input type="date" class="form-control rounded-3" id="bookDate"><input type="time" class="form-control rounded-3" id="bookTime"></div></div>
+            
+            <div class="mb-3"><label class="small fw-bold">Alamat Pengerjaan</label><textarea class="form-control rounded-3 border-0 bg-light mt-1" id="bookAddressManual" rows="2" placeholder="Ketik alamat lengkap..."></textarea></div>
+
+            <div class="mb-3" id="promoSection"><label class="small fw-bold text-primary">Voucher Diskon (5%)</label><select class="form-select rounded-3 mt-1" id="bookPromo" onchange="updateTotalDisplay()"><option value="0">Tanpa Voucher</option><option value="0.05">BERSIH5</option></select></div>
+            <div id="bundlingNotice" class="alert alert-info py-2 small d-none">Paket bundling harga net (Voucher tidak berlaku).</div>
+            
+            <div class="d-flex justify-content-between fw-bold mb-4 border-top pt-3"><span>Total:</span><span class="text-primary fs-5" id="totalPriceDisplay"></span></div>
+            <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg" onclick="confirmOrder()">BAYAR SEKARANG</button>
         </div>
     </div>
-    
-    <!-- Rating Modal -->
-    <div class="modal fade" id="ratingModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Beri Rating & Ulasan</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-3">
-                        <div class="rating-input" id="ratingInput">
-                            <i class="far fa-star" data-rating="1"></i>
-                            <i class="far fa-star" data-rating="2"></i>
-                            <i class="far fa-star" data-rating="3"></i>
-                            <i class="far fa-star" data-rating="4"></i>
-                            <i class="far fa-star" data-rating="5"></i>
-                        </div>
-                    </div>
-                    <textarea class="form-control" id="reviewText" rows="4" placeholder="Tulis ulasan Anda..."></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-pesan" onclick="submitRating()">Kirim</button>
-                </div>
-            </div>
+
+    <div class="modal-overlay" id="ratingModal">
+        <div class="modal-content-custom text-center shadow-lg">
+            <h5 class="fw-bold">Rating Petugas</h5>
+            <div class="my-4"><i class="bi bi-star rating-star" onclick="setRating(1)"></i><i class="bi bi-star rating-star" onclick="setRating(2)"></i><i class="bi bi-star rating-star" onclick="setRating(3)"></i><i class="bi bi-star rating-star" onclick="setRating(4)"></i><i class="bi bi-star rating-star" onclick="setRating(5)"></i></div>
+            <textarea class="form-control mb-3 rounded-4" id="ratingComment" placeholder="Ketik ulasan Anda..." rows="3"></textarea>
+            <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold" onclick="submitRating()">Kirim Ulasan</button>
         </div>
     </div>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
-        // Data Services
-        const services = [
-            {
-                id: 1,
-                name: 'Deep Cleaning',
-                icon: 'fa-broom',
-                desc: 'Pembersihan menyeluruh seluruh ruangan',
-                time: '3-4 jam',
-                price: 250000,
-                rating: 4.8,
-                reviews: 245
-            },
-            {
-                id: 2,
-                name: 'Nyapu & Ngepel',
-                icon: 'fa-shower',
-                desc: 'Menyapu dan mengepel lantai rumah',
-                time: '1-2 jam',
-                price: 80000,
-                rating: 4.7,
-                reviews: 189
-            },
-            {
-                id: 3,
-                name: 'Bersih Kamar Mandi',
-                icon: 'fa-toilet',
-                desc: 'Pembersihan kamar mandi lengkap',
-                time: '1-1.5 jam',
-                price: 100000,
-                rating: 4.9,
-                reviews: 312
-            },
-            {
-                id: 4,
-                name: 'Bersih Dapur',
-                icon: 'fa-utensils',
-                desc: 'Pembersihan dapur dan peralatan',
-                time: '1.5-2 jam',
-                price: 120000,
-                rating: 4.6,
-                reviews: 156
-            },
-            {
-                id: 5,
-                name: 'Kebersihan Taman',
-                icon: 'fa-leaf',
-                desc: 'Perawatan dan pembersihan taman',
-                time: '2-3 jam',
-                price: 150000,
-                rating: 4.5,
-                reviews: 98
-            },
-            {
-                id: 6,
-                name: 'Kebersihan Halaman',
-                icon: 'fa-home',
-                desc: 'Menyapu dan membersihkan halaman',
-                time: '1-2 jam',
-                price: 90000,
-                rating: 4.7,
-                reviews: 134
-            },
-            {
-                id: 7,
-                name: 'Cuci Kendaraan',
-                icon: 'fa-car',
-                desc: 'Cuci motor/mobil hingga bersih',
-                time: '30-60 menit',
-                price: 50000,
-                rating: 4.8,
-                reviews: 278
-            },
-            {
-                id: 8,
-                name: 'Servis Ringan',
-                icon: 'fa-wrench',
-                desc: 'Servis kendaraan ringan & cuci',
-                time: '1-2 jam',
-                price: 150000,
-                rating: 4.6,
-                reviews: 87
-            },
-            {
-                id: 9,
-                name: 'Laundry & Setrika',
-                icon: 'fa-tshirt',
-                desc: 'Cuci dan setrika pakaian',
-                time: '1 hari',
-                price: 8000,
-                priceUnit: '/kg',
-                rating: 4.9,
-                reviews: 423
-            }
+        let transData = JSON.parse(localStorage.getItem('trans')) || [];
+        let addresses = JSON.parse(localStorage.getItem('addrs')) || [];
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        let currentLang = localStorage.getItem('lang') || 'id';
+
+        const workers = [
+            { id: 1, name: "Siti Aminah", wa: "0812-3344-5566", rating: 4.9, photo: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop", review: "Sangat teliti & rapi kerjanya." },
+            { id: 2, name: "Budi Santoso", wa: "0877-1122-3344", rating: 4.8, photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop", review: "Sangat jujur dan sopan." }
         ];
-        
-        const bundles = [
-            {
-                id: 'b1',
-                name: 'Paket Rumah Bersih',
-                services: ['Nyapu & Ngepel', 'Bersih Kamar Mandi', 'Bersih Dapur'],
-                time: '4-5 jam',
-                price: 250000,
-                discount: 50000,
-                badge: 'Best Deal'
-            },
-            {
-                id: 'b2',
-                name: 'Paket Deep Clean Pro',
-                services: ['Deep Cleaning', 'Bersih Kamar Mandi', 'Kebersihan Halaman'],
-                time: '5-6 jam',
-                price: 380000,
-                discount: 80000,
-                badge: 'Paket Hemat'
-            },
-            {
-                id: 'b3',
-                name: 'Paket Kendaraan Plus',
-                services: ['Cuci Kendaraan', 'Servis Ringan'],
-                time: '2-3 jam',
-                price: 180000,
-                discount: 20000,
-                badge: 'Promo'
-            }
-        ];
-        
-        const promos = [
-            {
-                id: 1,
-                title: 'Diskon 30% First Order!',
-                code: 'BERESIN30',
-                desc: 'Khusus pengguna baru'
-            },
-            {
-                id: 2,
-                title: 'Gratis Cuci Kendaraan',
-                code: 'FREEWASH',
-                desc: 'Min. transaksi 200k'
-            },
-            {
-                id: 3,
-                title: 'Cashback 50k',
-                code: 'CASHBACK50',
-                desc: 'Paket bundling'
-            }
-        ];
-        
-        // Auth System
-        let currentUser = null;
-        let currentSlide = 0;
-        let selectedRating = 0;
-        let currentOrderId = null;
-        
-        function initApp() {
-            checkAuth();
-            setupEventListeners();
-            registerServiceWorker();
-        }
-        
-        function checkAuth() {
-            const session = localStorage.getItem('beresin_session');
-            if (session) {
-                currentUser = JSON.parse(session);
-                document.getElementById('authPage').classList.add('d-none');
-                document.getElementById('mainApp').classList.remove('d-none');
-                loadPage('home');
-            } else {
-                document.getElementById('authPage').classList.remove('d-none');
-                document.getElementById('mainApp').classList.add('d-none');
-            }
-        }
-        
-        function setupEventListeners() {
-            // Login
-            document.getElementById('loginFormElement').addEventListener('submit', handleLogin);
-            
-            // Register
-            document.getElementById('registerFormElement').addEventListener('submit', handleRegister);
-            
-            // Toggle auth forms
-            document.getElementById('showRegister').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('loginForm').classList.add('d-none');
-                document.getElementById('registerForm').classList.remove('d-none');
-            });
-            
-            document.getElementById('showLogin').addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('registerForm').classList.add('d-none');
-                document.getElementById('loginForm').classList.remove('d-none');
-            });
-            
-            // Bottom navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                    loadPage(item.dataset.page);
-                });
-            });
-            
-            // Rating stars
-            document.querySelectorAll('#ratingInput i').forEach(star => {
-                star.addEventListener('click', (e) => {
-                    selectedRating = parseInt(e.target.dataset.rating);
-                    updateRatingDisplay();
-                });
-            });
-        }
-        
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const remember = document.getElementById('rememberMe').checked;
-            
-            const users = JSON.parse(localStorage.getItem('beresin_users') || '[]');
-            const user = users.find(u => u.email === email && u.password === btoa(password));
-            
-            if (user) {
-                currentUser = user;
-                if (remember) {
-                    localStorage.setItem('beresin_session', JSON.stringify(user));
-                }
-                checkAuth();
-                showToast('Login berhasil!', 'success');
-            } else {
-                showToast('Email atau password salah!', 'danger');
-            }
-        }
-        
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('registerName').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const phone = document.getElementById('registerPhone').value;
-            
-            const users = JSON.parse(localStorage.getItem('beresin_users') || '[]');
-            
-            if (users.find(u => u.email === email)) {
-                showToast('Email sudah terdaftar!', 'warning');
-                return;
-            }
-            
-            const newUser = {
-                id: Date.now(),
-                name,
-                email,
-                password: btoa(password),
-                phone,
-                createdAt: new Date().toISOString()
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('beresin_users', JSON.stringify(users));
-            
-            showToast('Registrasi berhasil! Silakan login.', 'success');
-            document.getElementById('showLogin').click();
-        }
-        
-        function loadPage(page) {
-            const content = document.getElementById('mainContent');
-            
-            switch(page) {
-                case 'home':
-                    content.innerHTML = renderHomePage();
-                    initPromoSlider();
-                    animateCards();
-                    break;
-                case 'layanan':
-                    content.innerHTML = renderServicesPage();
-                    animateCards();
-                    break;
-                case 'pesanan':
-                    content.innerHTML = renderOrdersPage();
-                    animateCards();
-                    break;
-                case 'profile':
-                    content.innerHTML = renderProfilePage();
-                    animateCards();
-                    break;
-            }
-        }
-        
-        function renderHomePage() {
-            return `
-                <div class="promo-slider" id="promoSlider">
-                    ${promos.map((promo, idx) => `
-                        <div class="promo-slide" style="${idx > 0 ? 'display:none;' : ''}" onclick="showPromo(${promo.id})">
-                            <h4>${promo.title}</h4>
-                            <p>${promo.desc}</p>
-                            <div class="promo-code">${promo.code}</div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <h5 class="mb-3"><i class="fas fa-fire"></i> Paket Bundling Hemat</h5>
-                <div class="row">
-                    ${bundles.map(bundle => `
-                        <div class="col-md-6 mb-3">
-                            <div class="service-card">
-                                <span class="bundle-badge">${bundle.badge}</span>
-                                <div class="service-title">${bundle.name}</div>
-                                <div class="service-desc">
-                                    ${bundle.services.map(s => `• ${s}`).join('<br>')}
-                                </div>
-                                <div class="service-info">
-                                    <span class="service-time"><i class="far fa-clock"></i> ${bundle.time}</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <div>
-                                        <small class="text-muted" style="text-decoration: line-through;">Rp ${(bundle.price + bundle.discount).toLocaleString('id-ID')}</small>
-                                        <div class="service-price">Rp ${bundle.price.toLocaleString('id-ID')}</div>
-                                    </div>
-                                    <span class="badge bg-success">Hemat Rp ${bundle.discount.toLocaleString('id-ID')}</span>
-                                </div>
-                                <button class="btn-pesan" onclick="orderService('${bundle.id}', true)">Pesan Paket</button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <h5 class="mt-4 mb-3"><i class="fas fa-th-large"></i> Layanan Populer</h5>
-                <div class="row">
-                    ${services.slice(0, 6).map(service => renderServiceCard(service)).join('')}
-                </div>
-                
-                <div class="text-center mt-3">
-                    <button class="btn btn-outline-primary" onclick="loadPage('layanan')">Lihat Semua Layanan</button>
-                </div>
-                
-                <!-- Floating CS Button -->
-                <div style="position: fixed; bottom: 100px; right: 20px; z-index: 999;">
-                    <button class="btn btn-pesan rounded-circle" style="width: 60px; height: 60px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);" data-bs-toggle="modal" data-bs-target="#chatModal">
-                        <i class="fas fa-headset" style="font-size: 24px;"></i>
-                    </button>
-                </div>
-            `;
-        }
-        
-        function renderServicesPage() {
-            return `
-                <h4 class="mb-4"><i class="fas fa-th-large"></i> Semua Layanan</h4>
-                <div class="row">
-                    ${services.map(service => renderServiceCard(service)).join('')}
-                </div>
-            `;
-        }
-        
-        function renderServiceCard(service) {
-            return `
-                <div class="col-md-6 col-lg-4 mb-3">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas ${service.icon}"></i>
-                        </div>
-                        <div class="service-title">${service.name}</div>
-                        <div class="service-desc">${service.desc}</div>
-                        <div class="rating-stars mb-2">
-                            ${renderStars(service.rating)} 
-                            <small class="text-muted">(${service.reviews})</small>
-                        </div>
-                        <div class="service-info">
-                            <span class="service-time"><i class="far fa-clock"></i> ${service.time}</span>
-                        </div>
-                        <div class="service-price mb-3">
-                            Rp ${service.price.toLocaleString('id-ID')}${service.priceUnit || ''}
-                        </div>
-                        <button class="btn-pesan" onclick="orderService(${service.id}, false)">Pesan Sekarang</button>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function renderStars(rating) {
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 >= 0.5;
-            let stars = '';
-            
-            for(let i = 0; i < fullStars; i++) {
-                stars += '<i class="fas fa-star"></i>';
-            }
-            if(halfStar) stars += '<i class="fas fa-star-half-alt"></i>';
-            
-            return stars;
-        }
-        
-        function renderOrdersPage() {
-            const orders = JSON.parse(localStorage.getItem(`beresin_orders_${currentUser.id}`) || '[]');
-            
-            if(orders.length === 0) {
-                return `
-                    <div class="text-center" style="padding: 100px 20px;">
-                        <i class="fas fa-receipt" style="font-size: 80px; color: #ddd;"></i>
-                        <h5 class="mt-3 text-muted">Belum ada pesanan</h5>
-                        <button class="btn btn-pesan mt-3" onclick="loadPage('layanan')">Mulai Pesan</button>
-                    </div>
-                `;
-            }
-            
-            return `
-                <h4 class="mb-4"><i class="fas fa-receipt"></i> Riwayat Pesanan</h4>
-                ${orders.reverse().map(order => `
-                    <div class="order-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <div>
-                                <strong>${order.serviceName}</strong>
-                                <br><small class="text-muted">${new Date(order.date).toLocaleDateString('id-ID', {
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric',
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                })}</small>
-                            </div>
-                            <span class="order-status status-${order.status}">
-                                ${order.status === 'pending' ? 'Menunggu' : 
-                                  order.status === 'process' ? 'Diproses' : 
-                                  order.status === 'completed' ? 'Selesai' : 'Dibatalkan'}
-                            </span>
-                        </div>
-                        <div class="mb-2">
-                            <small class="text-muted"><i class="fas fa-map-marker-alt"></i> ${order.address}</small>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <strong style="color: var(--biru-tua);">Rp ${order.total.toLocaleString('id-ID')}</strong>
-                            <div>
-                                ${order.status === 'completed' && !order.rated ? 
-                                    `<button class="btn btn-sm btn-outline-primary me-2" onclick="openRating('${order.id}')">
-                                        <i class="far fa-star"></i> Rating
-                                    </button>` : ''}
-                                <button class="btn btn-sm btn-outline-secondary" onclick="reorder('${order.id}')">
-                                    <i class="fas fa-redo"></i> Pesan Lagi
-                                </button>
-                            </div>
-                        </div>
-                        ${order.rating ? `
-                            <div class="mt-2 p-2" style="background: #f8f9fa; border-radius: 8px;">
-                                <div class="rating-stars">${renderStars(order.rating)}</div>
-                                <small>${order.review}</small>
-                            </div>
-                        ` : ''}
-                    </div>
-                `).join('')}
-            `;
-        }
-        
-        function renderProfilePage() {
-            return `
-                <div class="profile-header">
-                    <div class="profile-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <h5>${currentUser.name}</h5>
-                    <p class="mb-0">${currentUser.email}</p>
-                </div>
-                
-                <div class="service-card">
-                    <h6 class="mb-3">Informasi Akun</h6>
-                    <form id="profileForm">
-                        <div class="mb-3">
-                            <label class="form-label">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="profileName" value="${currentUser.name}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" value="${currentUser.email}" disabled>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Nomor Telepon</label>
-                            <input type="tel" class="form-control" id="profilePhone" value="${currentUser.phone}">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Alamat</label>
-                            <textarea class="form-control" id="profileAddress" rows="3">${currentUser.address || ''}</textarea>
-                        </div>
-                        <button type="submit" class="btn-pesan mb-2">Simpan Perubahan</button>
-                    </form>
-                </div>
-                
-                <div class="service-card">
-                    <h6 class="mb-3">Voucher Saya</h6>
-                    ${promos.map(promo => `
-                        <div class="p-3 mb-2" style="background: var(--biru-muda); border-radius: 10px;">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <strong>${promo.title}</strong>
-                                    <br><small>${promo.desc}</small>
-                                </div>
-                                <div class="promo-code" style="margin: 0;">${promo.code}</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <button class="btn btn-danger w-100" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i> Keluar
-                </button>
-            `;
-        }
-        
-        function orderService(id, isBundle) {
-            let item, serviceName, price;
-            
-            if(isBundle) {
-                item = bundles.find(b => b.id === id);
-                serviceName = item.name;
-                price = item.price;
-            } else {
-                item = services.find(s => s.id === id);
-                serviceName = item.name;
-                price = item.price;
-            }
-            
-            const content = document.getElementById('mainContent');
-            content.innerHTML = `
-                <div class="checkout-steps">
-                    <div class="step active">1. Layanan</div>
-                    <div class="step active">2. Alamat</div>
-                    <div class="step active">3. Pembayaran</div>
-                </div>
-                
-                <div class="order-summary">
-                    <h6>Ringkasan Pesanan</h6>
-                    <p class="mb-1"><strong>${serviceName}</strong></p>
-                    <p class="mb-0 text-muted">Estimasi: ${item.time}</p>
-                </div>
-                
-                <div class="service-card">
-                    <h6 class="mb-3">Alamat Layanan</h6>
-                    <textarea class="form-control mb-3" id="orderAddress" rows="3" placeholder="Masukkan alamat lengkap..." required>${currentUser.address || ''}</textarea>
-                    <input type="text" class="form-control mb-3" id="orderPhone" placeholder="Nomor Telepon" value="${currentUser.phone}">
-                    <textarea class="form-control mb-3" id="orderNotes" rows="2" placeholder="Catatan tambahan (opsional)"></textarea>
-                    
-                    <h6 class="mb-3 mt-4">Kode Promo</h6>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="promoCode" placeholder="Masukkan kode promo">
-                        <button class="btn btn-outline-secondary" onclick="applyPromo()">Pakai</button>
-                    </div>
-                    <div id="promoResult"></div>
-                    
-                    <h6 class="mb-3 mt-4">Metode Pembayaran</h6>
-                    <div class="payment-method active" data-method="transfer">
-                        <i class="fas fa-university"></i> Transfer Bank
-                    </div>
-                    <div class="payment-method" data-method="ewallet">
-                        <i class="fas fa-wallet"></i> E-Wallet (GoPay, OVO, Dana)
-                    </div>
-                    <div class="payment-method" data-method="cod">
-                        <i class="fas fa-money-bill-wave"></i> Bayar di Tempat (COD)
-                    </div>
-                    
-                    <div class="mt-4 p-3" style="background: #f8f9fa; border-radius: 10px;">
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Subtotal</span>
-                            <strong id="subtotal">Rp ${price.toLocaleString('id-ID')}</strong>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2" id="discountRow" style="display: none !important;">
-                            <span class="text-success">Diskon</span>
-                            <strong class="text-success" id="discount">- Rp 0</strong>
-                        </div>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <strong>Total</strong>
-                            <strong class="text-primary" id="total" style="font-size: 20px;">Rp ${price.toLocaleString('id-ID')}</strong>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-pesan mt-3" onclick="processPayment(${isBundle}, ${id}, ${price})">
-                        <i class="fas fa-check-circle"></i> Konfirmasi & Bayar
-                    </button>
-                </div>
-            `;
-            
-            // Payment method selector
-            document.querySelectorAll('.payment-method').forEach(method => {
-                method.addEventListener('click', function() {
-                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-            
-            animateCards();
-        }
-        
-        function applyPromo() {
-            const code = document.getElementById('promoCode').value.toUpperCase();
-            const promo = promos.find(p => p.code === code);
-            const subtotalEl = document.getElementById('subtotal');
-            const subtotal = parseInt(subtotalEl.textContent.replace(/[^0-9]/g, ''));
-            
-            if(promo) {
-                let discount = 0;
-                if(code === 'BERESIN30') discount = subtotal * 0.3;
-                else if(code === 'CASHBACK50') discount = 50000;
-                else if(code === 'FREEWASH') discount = 50000;
-                
-                document.getElementById('discountRow').style.display = 'flex';
-                document.getElementById('discount').textContent = `- Rp ${discount.toLocaleString('id-ID')}`;
-                document.getElementById('total').textContent = `Rp ${(subtotal - discount).toLocaleString('id-ID')}`;
-                document.getElementById('promoResult').innerHTML = `<div class="alert alert-success">Promo berhasil diterapkan!</div>`;
-            } else {
-                document.getElementById('promoResult').innerHTML = `<div class="alert alert-danger">Kode promo tidak valid</div>`;
-            }
-        }
-        
-        function processPayment(isBundle, id, originalPrice) {
-            const address = document.getElementById('orderAddress').value;
-            const phone = document.getElementById('orderPhone').value;
-            const notes = document.getElementById('orderNotes').value;
-            const method = document.querySelector('.payment-method.active').dataset.method;
-            const total = parseInt(document.getElementById('total').textContent.replace(/[^0-9]/g, ''));
-            
-            if(!address || !phone) {
-                showToast('Mohon lengkapi alamat dan nomor telepon', 'warning');
-                return;
-            }
-            
-            // Show loading
-            const content = document.getElementById('mainContent');
-            content.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
-                    <h5 class="mt-4">Memproses pembayaran...</h5>
-                    <p class="text-muted">Mohon tunggu sebentar</p>
-                </div>
-            `;
-            
+
+        let selectedService = "", currentPrice = 0, isBundling = false, ratingTargetId = null, curRateValue = 0;
+
+        window.onload = () => {
+            applySavedPreferences();
             setTimeout(() => {
-                let serviceName;
-                if(isBundle) {
-                    serviceName = bundles.find(b => b.id === id).name;
-                } else {
-                    serviceName = services.find(s => s.id === id).name;
-                }
-                
-                const order = {
-                    id: 'ORD' + Date.now(),
-                    serviceId: id,
-                    serviceName,
-                    isBundle,
-                    address,
-                    phone,
-                    notes,
-                    method,
-                    total,
-                    status: 'pending',
-                    date: new Date().toISOString()
-                };
-                
-                const orders = JSON.parse(localStorage.getItem(`beresin_orders_${currentUser.id}`) || '[]');
-                orders.push(order);
-                localStorage.setItem(`beresin_orders_${currentUser.id}`, JSON.stringify(orders));
-                
-                content.innerHTML = `
-                    <div class="text-center" style="padding: 50px 20px;">
-                        <div style="font-size: 80px; color: #28a745;">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <h4 class="mt-3">Pesanan Berhasil!</h4>
-                        <p class="text-muted">Nomor Pesanan: <strong>${order.id}</strong></p>
-                        
-                        <div class="service-card mt-4 text-start">
-                            <h6 class="mb-3">Detail Pesanan</h6>
-                            <p class="mb-2"><strong>${serviceName}</strong></p>
-                            <p class="mb-2"><i class="fas fa-map-marker-alt"></i> ${address}</p>
-                            <p class="mb-2"><i class="fas fa-phone"></i> ${phone}</p>
-                            <hr>
-                            <div class="d-flex justify-content-between">
-                                <strong>Total Bayar</strong>
-                                <strong style="color: var(--biru-tua); font-size: 20px;">Rp ${total.toLocaleString('id-ID')}</strong>
-                            </div>
-                        </div>
-                        
-                        <button class="btn-pesan mt-3" onclick="loadPage('pesanan')">
-                            <i class="fas fa-receipt"></i> Lihat Pesanan
-                        </button>
-                        <button class="btn btn-outline-primary mt-2" onclick="loadPage('home')">
-                            <i class="fas fa-home"></i> Kembali ke Home
-                        </button>
-                    </div>
-                `;
-                
-                showToast('Pesanan berhasil dibuat!', 'success');
-                
-                // Simulate order status changes
-                setTimeout(() => {
-                    updateOrderStatus(order.id, 'process');
-                }, 3000);
-                
-                setTimeout(() => {
-                    updateOrderStatus(order.id, 'completed');
-                }, 8000);
-            }, 2000);
-        }
-        
-        function updateOrderStatus(orderId, status) {
-            const orders = JSON.parse(localStorage.getItem(`beresin_orders_${currentUser.id}`) || '[]');
-            const order = orders.find(o => o.id === orderId);
-            if(order) {
-                order.status = status;
-                localStorage.setItem(`beresin_orders_${currentUser.id}`, JSON.stringify(orders));
+                document.getElementById('splashScreen').style.opacity = '0';
+                setTimeout(() => { document.getElementById('splashScreen').style.display = 'none'; navigateTo('login'); }, 500);
+            }, 1500);
+            initSlider();
+        };
+
+        function navigateTo(id) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
+            document.getElementById(id + 'Page').classList.add('active');
+            if(document.getElementById('nav-'+id)) {
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.getElementById('nav-'+id).classList.add('active');
             }
+            if(id === 'transaction') renderTrans();
         }
-        
-        function reorder(orderId) {
-            const orders = JSON.parse(localStorage.getItem(`beresin_orders_${currentUser.id}`) || '[]');
-            const order = orders.find(o => o.id === orderId);
-            if(order) {
-                orderService(order.serviceId, order.isBundle);
-            }
-        }
-        
-        function openRating(orderId) {
-            currentOrderId = orderId;
-            selectedRating = 0;
-            updateRatingDisplay();
-            document.getElementById('reviewText').value = '';
-            new bootstrap.Modal(document.getElementById('ratingModal')).show();
-        }
-        
-        function updateRatingDisplay() {
-            document.querySelectorAll('#ratingInput i').forEach((star, idx) => {
-                if(idx < selectedRating) {
-                    star.classList.remove('far');
-                    star.classList.add('fas', 'active');
-                } else {
-                    star.classList.remove('fas', 'active');
-                    star.classList.add('far');
-                }
-            });
-        }
-        
-        function submitRating() {
-            if(selectedRating === 0) {
-                showToast('Pilih rating terlebih dahulu', 'warning');
-                return;
-            }
-            
-            const review = document.getElementById('reviewText').value;
-            const orders = JSON.parse(localStorage.getItem(`beresin_orders_${currentUser.id}`) || '[]');
-            const order = orders.find(o => o.id === currentOrderId);
-            
-            if(order) {
-                order.rating = selectedRating;
-                order.review = review;
-                order.rated = true;
-                localStorage.setItem(`beresin_orders_${currentUser.id}`, JSON.stringify(orders));
-                
-                bootstrap.Modal.getInstance(document.getElementById('ratingModal')).hide();
-                showToast('Terima kasih atas ulasan Anda!', 'success');
-                loadPage('pesanan');
-            }
-        }
-        
-        function showPromo(promoId) {
-            const promo = promos.find(p => p.id === promoId);
-            document.getElementById('promoModalBody').innerHTML = `
-                <h4>${promo.title}</h4>
-                <p>${promo.desc}</p>
-                <div class="promo-code" style="font-size: 24px; padding: 15px 30px;">${promo.code}</div>
-                <p class="mt-3 text-muted">Salin kode di atas dan gunakan saat checkout</p>
-            `;
-            new bootstrap.Modal(document.getElementById('promoModal')).show();
-        }
-        
-        function initPromoSlider() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.promo-slide');
-            
-            setInterval(() => {
-                slides[currentSlide].style.display = 'none';
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].style.display = 'block';
-                
-                anime({
-                    targets: slides[currentSlide],
-                    opacity: [0, 1],
-                    translateX: [50, 0],
-                    duration: 500,
-                    easing: 'easeOutQuad'
-                });
-            }, 4000);
-        }
-        
-        function animateCards() {
-            anime({
-                targets: '.service-card, .order-card, .profile-header',
-                opacity: [0, 1],
-                translateY: [30, 0],
-                delay: anime.stagger(100),
-                duration: 600,
-                easing: 'easeOutQuad'
-            });
-        }
-        
+
+        // AUTH
+        document.getElementById('regForm').onsubmit = (e) => {
+            e.preventDefault();
+            let u = { name: document.getElementById('regName').value, phone: document.getElementById('regPhone').value, email: document.getElementById('regEmail').value, password: document.getElementById('regPass').value };
+            addresses = [document.getElementById('regAddress').value];
+            localStorage.setItem('user_data', JSON.stringify(u));
+            localStorage.setItem('addrs', JSON.stringify(addresses));
+            alert("Daftar Berhasil! Silakan Masuk."); navigateTo('login');
+        };
+
+        document.getElementById('loginForm').onsubmit = (e) => {
+            e.preventDefault();
+            let saved = JSON.parse(localStorage.getItem('user_data'));
+            if(saved && document.getElementById('loginEmail').value === saved.email && document.getElementById('loginPass').value === saved.password) {
+                document.getElementById('appContainer').style.display = 'block';
+                updateProfileUI(); navigateTo('home');
+            } else { alert("Login Gagal! Akun tidak ditemukan."); }
+        };
+
+        // CHATBOT
+        function toggleChat() { let w = document.getElementById('chatbot-window'); w.style.display = (w.style.display === 'flex' ? 'none' : 'flex'); }
         function sendChat() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            
-            if(!message) return;
-            
-            const chatBody = document.getElementById('chatBody');
-            chatBody.innerHTML += `
-                <div class="alert alert-primary text-end">
-                    <strong>Anda:</strong> ${message}
-                </div>
-            `;
-            
-            input.value = '';
-            
+            let input = document.getElementById('chatInput');
+            let content = document.getElementById('chatContent');
+            if(!input.value) return;
+            content.innerHTML += `<div class="chat-bubble user">${input.value}</div>`;
+            let val = input.value.toLowerCase();
+            let res = "Maaf, saya tidak mengerti. Silakan hubungi CS via WhatsApp.";
+            if(val.includes("promo")) res = "Voucher diskon 5% bisa digunakan dengan kode BERSIH5!";
+            if(val.includes("harga")) res = "Harga layanan kami mulai dari Rp 35.000 per jam.";
+            if(val.includes("halo")) res = "Halo! Ada yang bisa kami bantu hari ini?";
             setTimeout(() => {
-                chatBody.innerHTML += `
-                    <div class="alert alert-info">
-                        <strong>CS Beresin:</strong> Terima kasih! Tim kami akan segera membantu Anda. Ada yang bisa kami bantu lagi?
+                content.innerHTML += `<div class="chat-bubble bot">${res}</div>`;
+                content.scrollTop = content.scrollHeight;
+            }, 800);
+            input.value = "";
+        }
+
+        // BOOKING
+        function openService(name, price, bundling) {
+            selectedService = name; currentPrice = price; isBundling = bundling;
+            document.getElementById('selectedServiceTitle').innerText = name;
+            const list = document.getElementById('workerList');
+            list.innerHTML = workers.map(w => `
+                <div class="worker-card" onclick="openBooking(${w.id})">
+                    <img src="${w.photo}" class="worker-img">
+                    <div class="flex-grow-1">
+                        <div class="fw-bold">${w.name}</div>
+                        <div class="small text-muted"><i class="bi bi-whatsapp"></i> ${w.wa}</div>
+                        <div class="small text-warning"><i class="bi bi-star-fill"></i> ${w.rating} <span class="text-muted">"${w.review}"</span></div>
+                        <div class="text-primary fw-bold">Rp ${price.toLocaleString()}</div>
                     </div>
-                `;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 1000);
-            
-            chatBody.scrollTop = chatBody.scrollHeight;
+                </div>`).join('');
+            navigateTo('service');
         }
-        
-        function logout() {
-            if(confirm('Yakin ingin keluar?')) {
-                localStorage.removeItem('beresin_session');
-                currentUser = null;
-                location.reload();
+
+        function openBooking(wid) {
+            const w = workers.find(x => x.id === wid);
+            document.getElementById('workerDetail').innerHTML = `<b>Layanan:</b> ${selectedService}<br><b>Petugas:</b> ${w.name}<br><b>WhatsApp:</b> ${w.wa}`;
+            document.getElementById('bookAddressManual').value = addresses[0] || ""; 
+            document.getElementById('bookPromo').value = "0";
+            if(isBundling) { document.getElementById('promoSection').classList.add('d-none'); document.getElementById('bundlingNotice').classList.remove('d-none'); }
+            else { document.getElementById('promoSection').classList.remove('d-none'); document.getElementById('bundlingNotice').classList.add('d-none'); }
+            updateTotalDisplay();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function updateTotalDisplay() {
+            let promo = isBundling ? 0 : parseFloat(document.getElementById('bookPromo').value);
+            let total = currentPrice * (1 - promo);
+            document.getElementById('totalPriceDisplay').innerText = "Rp " + total.toLocaleString();
+        }
+
+        function confirmOrder() {
+            if(!document.getElementById('bookDate').value || !document.getElementById('bookAddressManual').value) return alert("Mohon lengkapi jadwal dan alamat!");
+            transData.unshift({ id: Date.now(), service: selectedService, total: document.getElementById('totalPriceDisplay').innerText, date: document.getElementById('bookDate').value, status: "Selesai", rated: false });
+            localStorage.setItem('trans', JSON.stringify(transData));
+            closeModal('bookingModal'); showAlert('Pesanan Berhasil!','success'); navigateTo('transaction');
+        }
+
+        function renderTrans() {
+            const list = document.getElementById('transList');
+            list.innerHTML = transData.length === 0 ? "<div class='text-center mt-5 text-muted'>Kosong</div>" : transData.map(t => `<div class="trans-card"><div class="d-flex justify-content-between mb-2"><strong class="text-primary">${t.service}</strong><span class="badge bg-success rounded-pill">Selesai</span></div><div class="small text-muted">${t.date}</div><div class="d-flex justify-content-between align-items-center mt-3 border-top pt-2"><strong>${t.total}</strong>${!t.rated ? `<button class="btn btn-sm btn-primary rounded-pill px-4" onclick="openRating(${t.id})">Rating</button>` : `<span class="text-success small fw-bold">Selesai</span>`}</div></div>`).join('');
+        }
+
+        // PREFERENCES
+        function updateProfileUI() {
+            let u = JSON.parse(localStorage.getItem('user_data'));
+            if(!u) return;
+            document.getElementById('userNameDisplay').innerText = "Halo, " + u.name;
+            document.getElementById('profileNameDisplay').innerText = u.name;
+            document.getElementById('profilePhoneDisplay').innerText = u.phone;
+            document.getElementById('editName').value = u.name;
+            document.getElementById('editPhone').value = u.phone;
+            document.getElementById('addressList').innerHTML = addresses.map(a => `<div class="card p-3 mb-2 small shadow-sm border-0 rounded-3"><i class="bi bi-geo-alt-fill text-primary"></i> ${a}</div>`).join('');
+        }
+
+        function changeLang(l) { currentLang = l; localStorage.setItem('lang', l); applyLangStrings(); showAlert('Bahasa Diubah','primary'); }
+        function applyLangStrings() {
+            const s = { id: { deep: "Deep Clean", sweep: "Sapu Pel", toilet: "Toilet", pack: "Bundling", trans: "Pesanan" }, en: { deep: "Deep Clean", sweep: "Sweep", toilet: "Toilet", pack: "Bundling", trans: "Orders" } };
+            const d = s[currentLang];
+            if(document.getElementById('lang-deep')) {
+                document.getElementById('lang-deep').innerText = d.deep; document.getElementById('lang-sweep').innerText = d.sweep;
+                document.getElementById('lang-toilet').innerText = d.toilet; document.getElementById('lang-pack-title').innerText = d.pack;
             }
         }
-        
-        function showToast(message, type) {
-            const toast = document.createElement('div');
-            toast.className = `alert alert-${type} position-fixed top-0 start-50 translate-middle-x mt-3`;
-            toast.style.zIndex = '9999';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-        
-        // Profile form handler
-        document.addEventListener('submit', function(e) {
-            if(e.target.id === 'profileForm') {
-                e.preventDefault();
-                
-                currentUser.name = document.getElementById('profileName').value;
-                currentUser.phone = document.getElementById('profilePhone').value;
-                currentUser.address = document.getElementById('profileAddress').value;
-                
-                // Update in users array
-                const users = JSON.parse(localStorage.getItem('beresin_users') || '[]');
-                const userIndex = users.findIndex(u => u.id === currentUser.id);
-                if(userIndex !== -1) {
-                    users[userIndex] = currentUser;
-                    localStorage.setItem('beresin_users', JSON.stringify(users));
-                }
-                
-                // Update session
-                localStorage.setItem('beresin_session', JSON.stringify(currentUser));
-                
-                showToast('Profile berhasil diperbarui!', 'success');
-            }
-        });
-        
-        // Service Worker Registration
-        function registerServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                const swCode = `
-                    self.addEventListener('install', (event) => {
-                        event.waitUntil(
-                            caches.open('beresin-v1').then((cache) => {
-                                return cache.addAll(['/']);
-                            })
-                        );
-                    });
-                    
-                    self.addEventListener('fetch', (event) => {
-                        event.respondWith(
-                            caches.match(event.request).then((response) => {
-                                return response || fetch(event.request);
-                            })
-                        );
-                    });
-                `;
-                
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                
-                navigator.serviceWorker.register(swUrl).then(() => {
-                    console.log('Service Worker registered');
-                }).catch(() => {
-                    console.log('Service Worker registration failed');
-                });
-            }
-            
-            // Create manifest
-            const manifest = {
-                name: 'Beresin - Jasa Kebersihan',
-                short_name: 'Beresin',
-                start_url: '/',
-                display: 'standalone',
-                background_color: '#24A4FF',
-                theme_color: '#24A4FF',
-                icons: [
-                    {
-                        src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%2324A4FF" width="100" height="100"/><text y="75" font-size="70" fill="white" font-family="Arial" font-weight="bold" text-anchor="middle" x="50">B</text></svg>',
-                        sizes: '512x512',
-                        type: 'image/svg+xml'
-                    }
-                ]
-            };
-            
-            const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-            const manifestUrl = URL.createObjectURL(manifestBlob);
-            document.getElementById('manifestLink').href = manifestUrl;
-        }
-        
-        // Initialize app
-        initApp();
+
+        function toggleTheme() { currentTheme = (currentTheme === 'light' ? 'dark' : 'light'); document.body.setAttribute('data-theme', currentTheme); localStorage.setItem('theme', currentTheme); }
+        function applySavedPreferences() { document.body.setAttribute('data-theme', currentTheme); if(document.getElementById('themeSwitch')) document.getElementById('themeSwitch').checked = (currentTheme === 'dark'); document.getElementById(currentLang === 'id' ? 'langId' : 'langEn').checked = true; applyLangStrings(); }
+        function setRating(v) { curRateValue = v; document.querySelectorAll('.rating-star').forEach((s, i) => s.className = i < v ? 'bi bi-star-fill rating-star text-warning' : 'bi bi-star rating-star'); }
+        function openRating(id) { ratingTargetId = id; curRateValue = 0; setRating(0); document.getElementById('ratingModal').classList.add('active'); }
+        function submitRating() { if(curRateValue === 0) return alert("Pilih bintang!"); const idx = transData.findIndex(t => t.id === ratingTargetId); transData[idx].rated = true; localStorage.setItem('trans', JSON.stringify(transData)); closeModal('ratingModal'); renderTrans(); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function showAlert(m, t) { const a = document.createElement('div'); a.className = `alert-custom bg-${t} text-white`; a.innerText = m; document.body.appendChild(a); setTimeout(() => a.remove(), 2500); }
+        function handleLogout() { localStorage.removeItem('user_data'); location.reload(); }
+        function saveNewAddress() { let input = document.getElementById('newAddrInput').value; if(!input) return; addresses.unshift(input); localStorage.setItem('addrs', JSON.stringify(addresses)); updateProfileUI(); }
+        function initSlider() { let cur = 0; const slides = document.querySelectorAll('.banner-slide'); setInterval(() => { if(slides.length){ slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); } }, 4000); }
     </script>
 </body>
 </html>
