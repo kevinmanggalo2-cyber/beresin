@@ -135,6 +135,13 @@
     margin-bottom: 50px;
     animation: pulse 2s infinite; /* Tetap menggunakan animasi pulse yang sudah ada */
 }
+.trans-card{
+        background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding: 15px;
+    margin: 11px;
+    border-radius: 10px;
+}
     </style>
 </head>
 <body>
@@ -526,7 +533,7 @@
 
         function renderTrans() {
             const list = document.getElementById('transList');
-            list.innerHTML = transData.length === 0 ? "<div class='text-center mt-5 text-muted'>Kosong</div>" : transData.map(t => `<div class="trans-card"><div class="d-flex justify-content-between mb-2"><strong class="text-primary">${t.service}</strong><span class="badge bg-success rounded-pill">Selesai</span></div><div class="small text-muted">${t.date}</div><div class="d-flex justify-content-between align-items-center mt-3 border-top pt-2"><strong>${t.total}</strong>${!t.rated ? `<button class="btn btn-sm btn-primary rounded-pill px-4" onclick="openRating(${t.id})">Rating</button>` : `<span class="text-success small fw-bold">Selesai</span>`}</div></div>`).join('');
+            list.innerHTML = transData.length === 0 ? "<div class='text-center mt-5 text-muted'>Kosong</div>" : transData.map(t => `<div class="trans-card"><div class="d-flex justify-content-between mb-2"><strong class="text-primary">${t.service}</strong><span class="badge bg-success rounded-pill">Selesai</span></div><div class="small text-muted">${t.date}</div><div class="d-flex justify-content-between align-items-center mb-3 pt-2"><strong>${t.total}</strong>${!t.rated ? `<button class="btn btn-sm btn-primary rounded-pill px-4" onclick="openRating(${t.id})">Rating</button>` : `<span class="text-success small fw-bold">Selesai</span>`}</div></div>`).join('');
         }
 
         // PREFERENCES
