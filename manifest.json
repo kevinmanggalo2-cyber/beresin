@@ -5,7 +5,7 @@
   "description": "Aplikasi layanan cleaning service online yang memudahkan pengguna memesan jasa kebersihan hanya melalui smartphone",
   "start_url": "./index.html",
   "scope": "./",
-  "display": "Fullscreen",
+  "display": "Fullscreen sticky",
   "background_color": "#ffffff",
   "theme_color": "#24A4FF",
   "orientation": "portrait",
