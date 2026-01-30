@@ -7,8 +7,7 @@
     <meta name="description" content="Beresin - Aplikasi Layanan Kebersihan Profesional">
     <title>Beresin - Solusi Bersih Profesional</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="assets/192.png"><link>
-    <title>beresin</title>
+    <link rel="icon" type="image/png" href="assets/192.png">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -74,9 +73,42 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Components */
-        .banner-slider { position: relative; width: 50%; height: 200px; border-radius: 24px; overflow: hidden; margin-left: auto; margin-right: auto; margin-top: 1rem;margin-bottom: 1rem; box-shadow: 0 10px 25px rgba(36,164,255,0.2); }
-        .banner-slide { position: absolute; inset: 0; opacity: 0; transition: 0.8s; background-size: cover; background-position: center; background-repeat: no-repeat;}
-        .banner-slide.active { opacity: 1; }
+        /* PERBAIKAN: Banner Slider Lebar Penuh */
+        .banner-slider {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 0;
+            overflow: hidden;
+            margin: 0 0 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(36,164,255,0.15);
+            background: var(--card-bg);
+        }
+        .banner-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+        }
+        .banner-slide.active {
+            opacity: 1;
+            transform: scale(1.02);
+        }
+        .banner-slider::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
+            pointer-events: none;
+        }
 
         /* Voucher System */
         .voucher-section { padding: 0 1rem; margin-bottom: 1.5rem; }
@@ -92,14 +124,74 @@
         .voucher-card small { font-size: 0.7rem; opacity: 0.9; }
 
         /* Grid */
-        .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; padding: 0 1rem 1rem 1rem; }
-        .service-item {
-            text-align: center; padding: 18px 10px; background: var(--card-bg); border-radius: 22px;
-            border: 1px solid var(--border-color); cursor: pointer; transition: 0.3s;
+        .service-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 15px; 
+            padding: 0 1rem 1rem 1rem; 
         }
-        .service-item:active { transform: scale(0.9); background: var(--primary-light); }
-        .service-item i { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 8px; display: block; }
-        .service-item small { font-weight: 700; font-size: 0.75rem; color: var(--text-main); }
+        .service-item {
+            text-align: center; 
+            padding: 18px 10px; 
+            background: var(--card-bg); 
+            border-radius: 22px;
+            border: 1px solid var(--border-color); 
+            cursor: pointer; 
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-item:active { 
+            transform: scale(0.95); 
+            background: var(--primary-light); 
+        }
+        .service-item i { 
+            font-size: 2.2rem; 
+            color: var(--primary-color); 
+            margin-bottom: 8px; 
+            display: block; 
+        }
+        .service-item small { 
+            font-weight: 700; 
+            font-size: 0.75rem; 
+            color: var(--text-main); 
+            margin-top: 5px;
+        }
+        
+        /* Custom Icon for Setrika */
+        .icon-setrika {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+        .icon-setrika::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 20px;
+            background: white;
+            border-radius: 3px;
+            transform: perspective(10px) rotateX(10deg);
+            box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+        }
+        .icon-setrika::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 4px;
+            background: white;
+            top: -6px;
+            border-radius: 2px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+        }
 
         /* Worker Cards */
         .worker-card {
@@ -130,18 +222,235 @@
         .badge-net { background: var(--primary-light); color: var(--primary-color); font-size: 0.7rem; padding: 5px 10px; border-radius: 8px; font-weight: 800; display: inline-block; margin-top: 5px; }
     
         .splash-logo-img {
-    width: 500px; /* Atur lebar logo sesuai keinginan */
-    height: auto;
-    margin-bottom: 50px;
-    animation: pulse 2s infinite; /* Tetap menggunakan animasi pulse yang sudah ada */
-}
-.trans-card{
-        background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    padding: 15px;
-    margin: 11px;
-    border-radius: 10px;
-}
+            width: 500px;
+            height: auto;
+            margin-bottom: 50px;
+            animation: pulse 2s infinite;
+        }
+        .trans-card{
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            padding: 15px;
+            margin: 11px;
+            border-radius: 10px;
+        }
+
+        /* Payment Method Styles */
+        .payment-method {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background: var(--primary-light);
+            box-shadow: 0 4px 15px rgba(36,164,255,0.2);
+        }
+        .payment-method-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .payment-method-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .payment-method-info h6 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .payment-method-info small {
+            color: var(--text-sub);
+            font-size: 0.75rem;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .payment-check {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .payment-method.selected .payment-check {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .payment-method.selected .payment-check i {
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        /* Payment group headers */
+        .payment-group-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            padding-left: 5px;
+            margin-top: 15px;
+        }
+        
+        /* Payment badge in transaction */
+        .payment-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+            color: white;
+        }
+
+        /* Package Card Styles */
+        .package-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .package-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+        .package-price {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+        .package-description {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .package-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .btn-order {
+            flex: 2;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-order:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .btn-workers {
+            flex: 1;
+            background: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn-workers:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-color);
+        }
+        .package-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .benefit-tag {
+            background: var(--primary-light);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Banner Indicators */
+        .banner-indicators {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        .banner-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .banner-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -203,16 +512,25 @@
                 </div>
             </div>
             
+            <!-- PERBAIKAN: Banner Slider Lebar Penuh -->
             <div class="banner-slider" id="bannerSlider">
-               <div class="banner-slide active" style="background-image: url('assets/slideiklanvoucher.png');"></div>
-               <div class="banner-slide active" style="background-image: url('assets/sliderumahkinclong.jpg');"></div>
+               <div class="banner-slide active" style="background-image: url('assets/slideiklanvoucher.png'); background-color: #24A4FF; background-size: cover; background-position: center;"></div>
+               <div class="banner-slide" style="background-image: url('assets/sliderumahkinclong.jpg'); background-color: #1d8ce0; background-size: cover; background-position: center;"></div>
+               <div class="banner-slide" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); background-color: #0066cc; background-size: cover; background-position: center;"></div>
+               
+               <!-- Indicators -->
+               <div class="banner-indicators">
+                   <div class="banner-indicator active" onclick="goToSlide(0)"></div>
+                   <div class="banner-indicator" onclick="goToSlide(1)"></div>
+                   <div class="banner-indicator" onclick="goToSlide(2)"></div>
+               </div>
             </div>
 
             <div class="voucher-section">
                 <h6 class="fw-bold mb-2">Pusat Voucher Promo</h6>
                 <div class="voucher-container">
-                    <div class="voucher-card"><h6>BERSIH5</h6><small>Diskon 5%</small></div>
-                    <div class="voucher-card blue"><h6>HEMAT10</h6><small>Potongan 10rb</small></div>
+                    <div class="voucher-card"><h6>BERSIH</h6><small>Diskon 5%</small></div>
+                    <div class="voucher-card blue"><h6>HEMAT</h6><small>Potongan 10rb</small></div>
                     <div class="voucher-card"><h6>NEWUSER</h6><small>Khusus Member</small></div>
                     <div class="voucher-card blue"><h6>CASHBACK</h6><small>Koin Beresin</small></div>
                     <div class="voucher-card"><h6>Kinclong</h6><small>Spesial Toilet</small></div>
@@ -220,12 +538,31 @@
             </div>
 
             <div class="service-grid">
-                <div class="service-item" onclick="openService('Deep Clean', 100000, false)"><i class="bi bi-house-heart"></i><small id="lang-deep">Deep Clean</small></div>
-                <div class="service-item" onclick="openService('Sapu Pel', 40000, false)"><i class="bi bi-mop"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.221 19.643c.477-.903.942-1.937 1.24-2.98c.411-1.438.56-2.788.602-3.818l-1.552-1.552l-5.804-5.804l-1.552-1.552c-1.03.042-2.38.19-3.817.602c-1.045.298-2.078.763-2.981 1.24C2.1 6.97 1.427 9.71 2.497 11.807l.013.025l.7 1.15a23.34 23.34 0 0 0 7.808 7.809l1.15.699l.025.013c2.096 1.07 4.837.396 6.028-1.86m3.554-16.33a.77.77 0 0 0-1.088-1.088L19.012 3.9a4.88 4.88 0 0 0-5.718 0l1.109 1.109l4.588 4.588l1.109 1.109a4.88 4.88 0 0 0 0-5.718z"/></svg></i><small id="lang-sweep">Sapu Pel</small></div>
-                <div class="service-item" onclick="openService('Toilet', 60000, false)"><i class="bi bi-droplet"></i><small id="lang-toilet">Toilet</small></div>
-                <div class="service-item" onclick="openService('Laundry', 50000, false)"><i class="bi bi-basket"></i><small id="lang-laundry">Laundry</small></div>
-                <div class="service-item" onclick="openService('Setrika', 35000, false)"><i class="bi bi-steam"></i><small id="lang-iron">Setrika</small></div>
-                <div class="service-item" onclick="navigateTo('categoryOthers')"><i class="bi bi-grid-fill"></i><small id="lang-others">Lainnya</small></div>
+                <div class="service-item" onclick="openService('Deep Clean', 100000, false)">
+                    <i class="bi bi-house-heart"></i>
+                    <small id="lang-deep">Deep Clean</small>
+                </div>
+                <div class="service-item" onclick="openService('Sapu Pel', 40000, false)">
+                   <i class="fa-solid fa-broom-wide"></i>
+                    <small id="lang-sweep">Sapu Pel</small>
+                </div>
+                <div class="service-item" onclick="openService('Toilet', 60000, false)">
+                    <i class="bi bi-droplet"></i>
+                    <small id="lang-toilet">Toilet</small>
+                </div>
+                <div class="service-item" onclick="openService('Laundry', 50000, false)">
+                    <i class="bi bi-basket"></i>
+                    <small id="lang-laundry">Laundry</small>
+                </div>
+                <!-- PERBAIKAN: Ikon Setrika Custom -->
+                <div class="service-item" onclick="openService('Setrika', 35000, false)">
+                    <i class="fa-solid fa-broom-wide"></i>
+                    <small id="lang-iron">Setrika</small>
+                </div>
+                <div class="service-item" onclick="navigateTo('categoryOthers')">
+                    <i class="bi bi-grid-fill"></i>
+                    <small id="lang-others">Lainnya</small>
+                </div>
             </div>
 
             <div class="px-3 pb-3">
@@ -251,23 +588,146 @@
             <div id="workerList" class="p-3"></div>
         </div>
 
+        <!-- MODIFIKASI: Halaman Paket dengan Tombol Ganda -->
         <div id="packagePage" class="page-content">
-            <div class="p-3 bg-white shadow-sm border-bottom sticky-top"><h5 class="fw-bold m-0" id="lang-pack-title">5 Paket Bundling Hemat</h5></div>
+            <div class="p-3 bg-white shadow-sm border-bottom sticky-top">
+                <h5 class="fw-bold m-0" id="lang-pack-title">5 Paket Bundling Hemat</h5>
+                <p class="small text-muted mb-0 mt-1">Pilih paket dan lihat petugas yang tersedia</p>
+            </div>
             <div class="p-3">
-                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Deep Clean + Laundry', 120000, true)" style="cursor:pointer">
-                    <div class="text-start"><h6>Deep Clean + Laundry</h6><span class="badge-net">Hemat 30rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 120k</span>
+                <!-- Deep Clean + Laundry -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div>
+                            <div class="package-title">Deep Clean + Laundry</div>
+                            <span class="badge-net">Hemat 30rb (Harga Net)</span>
+                        </div>
+                        <div class="package-price">Rp 120k</div>
+                    </div>
+                    <div class="package-description">
+                        Paket lengkap untuk pembersihan mendalam rumah Anda ditambah layanan laundry pakaian.
+                    </div>
+                    <div class="package-benefits">
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Pembersihan Mendalam</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Laundry Pakaian</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> 4 Jam Kerja</span>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="btn-order" onclick="quickOrder('Deep Clean + Laundry', 120000, true)">
+                            <i class="bi bi-cart-check"></i> Pesan Langsung
+                        </button>
+                        <button class="btn-workers" onclick="openService('Deep Clean + Laundry', 120000, true)">
+                            <i class="bi bi-people"></i> Lihat Pekerja
+                        </button>
+                    </div>
                 </div>
-                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Setrika + Sapu Pel', 60000, true)" style="cursor:pointer">
-                    <div class="text-start"><h6>Setrika + Sapu Pel</h6><span class="badge-net">Hemat 15rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 60k</span>
+
+                <!-- Setrika + Sapu Pel -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div>
+                            <div class="package-title">Setrika + Sapu Pel</div>
+                            <span class="badge-net">Hemat 15rb (Harga Net)</span>
+                        </div>
+                        <div class="package-price">Rp 60k</div>
+                    </div>
+                    <div class="package-description">
+                        Layanan setrika pakaian ditambah sapu pel untuk rumah Anda yang lebih bersih dan rapi.
+                    </div>
+                    <div class="package-benefits">
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Setrika Pakaian</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Sapu & Pel Lantai</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> 3 Jam Kerja</span>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="btn-order" onclick="quickOrder('Setrika + Sapu Pel', 60000, true)">
+                            <i class="bi bi-cart-check"></i> Pesan Langsung
+                        </button>
+                        <button class="btn-workers" onclick="openService('Setrika + Sapu Pel', 60000, true)">
+                            <i class="bi bi-people"></i> Lihat Pekerja
+                        </button>
+                    </div>
                 </div>
-                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Cuci AC + Toilet', 110000, true)" style="cursor:pointer">
-                    <div class="text-start"><h6>Cuci AC + Toilet</h6><span class="badge-net">Hemat 25rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 110k</span>
+
+                <!-- Cuci AC + Toilet -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div>
+                            <div class="package-title">Cuci AC + Toilet</div>
+                            <span class="badge-net">Hemat 25rb (Harga Net)</span>
+                        </div>
+                        <div class="package-price">Rp 110k</div>
+                    </div>
+                    <div class="package-description">
+                        Perawatan AC dan pembersihan toilet secara menyeluruh untuk kenyamanan rumah Anda.
+                    </div>
+                    <div class="package-benefits">
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Cuci AC Unit</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Pembersihan Toilet</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Sanitasi Lengkap</span>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="btn-order" onclick="quickOrder('Cuci AC + Toilet', 110000, true)">
+                            <i class="bi bi-cart-check"></i> Pesan Langsung
+                        </button>
+                        <button class="btn-workers" onclick="openService('Cuci AC + Toilet', 110000, true)">
+                            <i class="bi bi-people"></i> Lihat Pekerja
+                        </button>
+                    </div>
                 </div>
-                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Dapur + Kamar Mandi', 100000, true)" style="cursor:pointer">
-                    <div class="text-start"><h6>Dapur + Kamar Mandi</h6><span class="badge-net">Hemat 20rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 100k</span>
+
+                <!-- Dapur + Kamar Mandi -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div>
+                            <div class="package-title">Dapur + Kamar Mandi</div>
+                            <span class="badge-net">Hemat 20rb (Harga Net)</span>
+                        </div>
+                        <div class="package-price">Rp 100k</div>
+                    </div>
+                    <div class="package-description">
+                        Fokus pembersihan area dapur dan kamar mandi - dua area paling penting di rumah.
+                    </div>
+                    <div class="package-benefits">
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Dapur Bersih</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Kamar Mandi Kinclong</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> 3.5 Jam Kerja</span>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="btn-order" onclick="quickOrder('Dapur + Kamar Mandi', 100000, true)">
+                            <i class="bi bi-cart-check"></i> Pesan Langsung
+                        </button>
+                        <button class="btn-workers" onclick="openService('Dapur + Kamar Mandi', 100000, true)">
+                            <i class="bi bi-people"></i> Lihat Pekerja
+                        </button>
+                    </div>
                 </div>
-                <div class="card p-3 mb-3 border-0 shadow-sm rounded-4 d-flex flex-row justify-content-between align-items-center" onclick="openService('Full House Clean', 250000, true)" style="cursor:pointer">
-                    <div class="text-start"><h6>Full House Clean</h6><span class="badge-net">Hemat 100rb (Harga Net)</span></div><span class="text-primary fw-bold">Rp 250k</span>
+
+                <!-- Full House Clean -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <div>
+                            <div class="package-title">Full House Clean</div>
+                            <span class="badge-net">Hemat 100rb (Harga Net)</span>
+                        </div>
+                        <div class="package-price">Rp 250k</div>
+                    </div>
+                    <div class="package-description">
+                        Paket komplit untuk pembersihan seluruh rumah dari ujung ke ujung.
+                    </div>
+                    <div class="package-benefits">
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Semua Ruangan</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> Tim 2 Petugas</span>
+                        <span class="benefit-tag"><i class="bi bi-check-circle"></i> 6 Jam Kerja</span>
+                    </div>
+                    <div class="package-buttons">
+                        <button class="btn-order" onclick="quickOrder('Full House Clean', 250000, true)">
+                            <i class="bi bi-cart-check"></i> Pesan Langsung
+                        </button>
+                        <button class="btn-workers" onclick="openService('Full House Clean', 250000, true)">
+                            <i class="bi bi-people"></i> Lihat Pekerja
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -344,6 +804,7 @@
         </div>
     </div>
 
+    <!-- Booking Modal -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content-custom shadow-lg">
             <div class="d-flex justify-content-between mb-3"><h5 class="fw-bold m-0">Checkout</h5><button class="btn-close" onclick="closeModal('bookingModal')"></button></div>
@@ -357,10 +818,192 @@
             <div id="bundlingNotice" class="alert alert-info py-2 small d-none">Paket bundling harga net (Voucher tidak berlaku).</div>
             
             <div class="d-flex justify-content-between fw-bold mb-4 border-top pt-3"><span>Total:</span><span class="text-primary fs-5" id="totalPriceDisplay"></span></div>
-            <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg" onclick="confirmOrder()">BAYAR SEKARANG</button>
+            <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg" onclick="proceedToPayment()">LANJUT KE PEMBAYARAN</button>
         </div>
     </div>
 
+    <!-- Payment Method Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-content-custom shadow-lg">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold m-0">Pilih Metode Pembayaran</h5>
+                <button class="btn-close" onclick="closeModal('paymentModal')"></button>
+            </div>
+
+            <div class="mb-4">
+                <!-- E-Wallet Group -->
+                <div class="payment-group-title">E-Wallet</div>
+                <div class="payment-method" onclick="selectPayment('dana')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #0080FF;">
+                            <i class="bi bi-wallet2 text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>DANA</h6>
+                            <small>Bayar dengan DANA</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('gopay')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #00AA13;">
+                            <i class="bi bi-wallet2 text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>GoPay</h6>
+                            <small>Bayar dengan GoPay</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('ovo')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #4C2A86;">
+                            <i class="bi bi-wallet2 text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>OVO</h6>
+                            <small>Bayar dengan OVO</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('shopeepay')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #EE4D2D;">
+                            <i class="bi bi-wallet2 text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>ShopeePay</h6>
+                            <small>Bayar dengan ShopeePay</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <!-- QRIS -->
+                <div class="payment-group-title">QRIS</div>
+                <div class="payment-method" onclick="selectPayment('qris')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon">
+                            <i class="bi bi-qr-code text-primary"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>QRIS</h6>
+                            <small>Scan QR Code untuk bayar</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <!-- M-Banking Group -->
+                <div class="payment-group-title">Mobile Banking</div>
+                <div class="payment-method" onclick="selectPayment('bca')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #0066B3;">
+                            <i class="bi bi-bank text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>BCA Mobile</h6>
+                            <small>Transfer via BCA</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('mandiri')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #0033A0;">
+                            <i class="bi bi-bank text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>Mandiri Online</h6>
+                            <small>Transfer via Mandiri</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('bri')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #0033A0;">
+                            <i class="bi bi-bank text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>BRI Mobile</h6>
+                            <small>Transfer via BRI</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <div class="payment-method" onclick="selectPayment('bni')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #0083C9;">
+                            <i class="bi bi-bank text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>BNI Mobile</h6>
+                            <small>Transfer via BNI</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+
+                <!-- COD -->
+                <div class="payment-group-title">Tunai</div>
+                <div class="payment-method" onclick="selectPayment('cod')">
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="payment-method-icon" style="background: #28a745;">
+                            <i class="bi bi-cash-coin text-white"></i>
+                        </div>
+                        <div class="payment-method-info">
+                            <h6>Cash On Delivery (COD)</h6>
+                            <small>Bayar tunai saat petugas datang</small>
+                        </div>
+                    </div>
+                    <div class="payment-check">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-top pt-3 mb-3">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="text-muted">Total Pembayaran:</span>
+                    <span class="fw-bold text-primary fs-5" id="paymentTotalDisplay"></span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg" onclick="confirmPayment()" id="paymentBtn" disabled>
+                BAYAR SEKARANG
+            </button>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
     <div class="modal-overlay" id="ratingModal">
         <div class="modal-content-custom text-center shadow-lg">
             <h5 class="fw-bold">Rating Petugas</h5>
@@ -371,67 +1014,174 @@
     </div>
 
     <script>
+        // DATA DAN VARIABEL GLOBAL
         let transData = JSON.parse(localStorage.getItem('trans')) || [];
         let addresses = JSON.parse(localStorage.getItem('addrs')) || [];
         let currentTheme = localStorage.getItem('theme') || 'light';
         let currentLang = localStorage.getItem('lang') || 'id';
+        let selectedPaymentMethod = '';
+        let currentSlide = 0;
+        let slideInterval;
 
+        // MAPPING LAYANAN KE KETERAMPILAN
+        const serviceSkills = {
+            "Deep Clean": ["deep_clean"],
+            "Sapu Pel": ["sapu_pel"],
+            "Toilet": ["toilet"],
+            "Laundry": ["laundry"],
+            "Setrika": ["setrika"],
+            "Cuci AC": ["cuci_ac"],
+            "Taman": ["taman"],
+            "Fogging": ["fogging"],
+            "Dapur + Kamar Mandi": ["dapur", "toilet"],
+            "Deep Clean + Laundry": ["deep_clean", "laundry"],
+            "Setrika + Sapu Pel": ["setrika", "sapu_pel"],
+            "Cuci AC + Toilet": ["cuci_ac", "toilet"],
+            "Full House Clean": ["deep_clean", "sapu_pel", "toilet", "laundry"]
+        };
+
+        // DATA PEKERJA DENGAN KETERAMPILAN (DIPERBARUI)
         const workers = [
-            { id: 1, name: "Andi Pratama", wa: "0812-3344-5566", rating: 4.9, photo: "assets/pembantu1.jpg", review: "Sangat teliti & rapi kerjanya." },
-            { id: 2, name: "Budi Santosa", wa: "0877-1122-3344", rating: 4.8, photo: "assets/pembantu2.jpg", review: "Sangat jujur dan sopan." },
-            { id: 3, name: "Rizky Maulana", wa: "0812-3344-4477", rating: 4.5, photo: "assets/pembantu11.jpg", review: "Sangat kompeten dan telaten." },
-            { id: 4, name: "Agus Firmansyah", wa: "0812-3344-9876", rating: 4.6, photo: "assets/pembantu12.jpg", review: "Kerja cepat dan rumah jadi bersih." },
-            { id: 5, name: "Deni Kurniawam", wa: "0812-3344-5557", rating: 4.9, photo: "assets/pembantu13.jpg", review: "Kerja sopan dan detail." },
-            { id: 6, name: "Siti Aisyah", wa: "0812-3345-5766", rating: 4.8, photo: "assets/SitiAisyah.jpg", review: "Teliti dan rapi sampai detail kecil." },
-            { id: 7, name: "Dewi Lestari", wa: "0812-2244-5786", rating: 4.9, photo: "assets/DewiLestari.png", review: "Kamar Mandi jadi kinclong." },
-            { id: 8, name: "Nurul Hidayah", wa: "0812-3111-4326", rating: 4.8, photo: "assets/pembantu5.jpg", review: "bersih menyeluruh dan wangi." },
-            { id: 9, name: "Putri Ananda", wa: "0812-3221-5746", rating: 4.9, photo: "assets/pembantu6.jpg", review: "sangat detail dan telaten." },
-            { id: 10, name: "Rina Marlina", wa: "0812-3232-8966", rating: 4.7, photo: "assets/pembantu7.jpg", review: "Hasil bersih maksimal." },
-            { id: 11, name: "Adi Nugraha", wa: "0881-3882-8956", rating: 4.9, photo: "assets/AdiNugraha.jpg", review: "Kerja cepat dan sangat bersih." },
-            { id: 12, name: "Aldy Firmansyah", wa: "0895-3890-9966", rating: 4.7, photo: "assets/AldyFirmansyah.jpg", review: "Kerja rapi tanpa dipantau." },
-            { id: 13, name: "Anisa Putri", wa: "0895-3890-9966", rating: 4.7, photo: "assets/AnisaPutri.jpg", review: "Pelayanan ramah dan sopan." },
-            { id: 14, name: "Ayu Permata", wa: "0885-8950-9614", rating: 4.9, photo: "assets/AyuPermata.jpg", review: "Bersih, rapi dan wangi." },
-            { id: 15, name: "Bayu Rahmadan", wa: "0895-3000-9998", rating: 4.7, photo: "assets/BayuRahmadan.jpg", review: "Rapi, secara detail dan telaten." },
-            { id: 16, name: "Citra Puspita", wa: "0887-4590-7776", rating: 4.8, photo: "assets/CitraPuspita.jpg", review: "Pelayanan ramah dan rapi." },
-            { id: 17, name: "Clara Wijaya", wa: "0890-4050-2309", rating: 4.9, photo: "assets/ClaraWijaya.jpg", review: "Ramah, rapi dan wangi." },
-            { id: 18, name: "Dimas Saputro", wa: "0811-0000-7906", rating: 4.8, photo: "assets/DimasSaputro.jpg", review: "Teliti dan rapi." },
-            { id: 19, name: "Dina Rahmawati", wa: "0880-3540-3450", rating: 4.6, photo: "assets/DinaRahmawati.jpg", review: "Sangat detail dan telaten." },
-            { id: 20, name: "Elina Natalia", wa: "0895-3390-0066", rating: 4.9, photo: "assets/ElinaNatalia.jpg", review: "Sangat jujur dan sopan." },
-            { id: 21, name: "Eliza Natalia", wa: "0847-5523-1411", rating: 4.8, photo: "assets/ElizaNatalia.jpg", review: "Profesional dan rapi." },
-            { id: 22, name: "Fitri Handayani", wa: "0885-6532-7485", rating: 4.8, photo: "assets/FitriaHandayani.jpg", review: "Hasil sesuai ekspektasi." },
-            { id: 23, name: "Haris Fadillah", wa: "0865-6932-4215", rating: 4.6, photo: "assets/HarisFadillah.jpg", review: "Cukup baik." },
-            { id: 24, name: "Hendra Wijaya", wa: "0821-3652-1425", rating: 4.9, photo: "assets/HendraWijaya.jpg", review: "Deep cleaning sangat maksimal." },
-            { id: 25, name: "Imam Maulana", wa: "0836-9874-2547", rating: 4.6, photo: "assets/ImamMaulana.jpg", review: "Pelayanan oke." },
-            { id: 26, name: "Joko Susilo", wa: "0814-3982-4561", rating: 4.8, photo: "assets/JokoSusilo.jpg", review: "Kerja Cepat." },
-            { id: 27, name: "Kirana Ayu", wa: "0880-1122-3365", rating: 4.7, photo: "assets/KiranaAyu.jpg", review: "Telaten dan ramah." },
-            { id: 28, name: "Lilis Kartika", wa: "0888-5578-9999", rating: 4.9, photo: "assets/LilisKartika.jpg", review: "Deep cleaning terbaik." },
-            { id: 29, name: "Lina Oktaviani", wa: "0811-5555-1478", rating: 4.7, photo: "assets/LinaOktaviani.jpg", review: "Pelayanan sopan dan ramah." },
-            { id: 30, name: "Melati Purnomo", wa: "0866-2222-8888", rating: 4.8, photo: "assets/MelatiPurnomo.jpg", review: "Sangat bersih." },
-            { id: 31, name: "Mutiara Putri", wa: "0812-3232-8976", rating: 4.8, photo: "assets/MutiaraPutri.jpg", review: "Kerja Cepat." },
-            { id: 32, name: "Nabila Zahra", wa: "0812-1112-8966", rating: 4.5, photo: "assets/NabilaZahra.jpg", review: "Profesional." },
-            { id: 33, name: "Naufal Rizky", wa: "0812-3232-1966", rating: 4.7, photo: "assets/NaufalRizky.jpg", review: "Hasil Sesuai Ekspetasi." },
-            { id: 34, name: "Nia Anggraini", wa: "0812-3232-1166", rating: 4.7, photo: "assets/NiaAnggraini.jpg", review: "Detail dan Rapi." },
-            { id: 35, name: "Nur Hidayah", wa: "0811-2232-8966", rating: 4.9, photo: "assets/NurHidayah.jpg", review: "Kerja Bersih." },
-            { id: 36, name: "Purwanto", wa: "0812-7777-8966", rating: 4.7, photo: "assets/Purwanto.jpg", review: "Pelayanan Sangat Baik." },
-            { id: 37, name: "Rafi Akbar", wa: "0812-6666-8966", rating: 4.6, photo: "assets/RafiAkbar.jpg", review: "Cukup Rapi." },
-            { id: 38, name: "Rahma Safitri", wa: "0812-7777-9999", rating: 4.8, photo: "assets/RahmaSafitri.jpg", review: "Sangat Teliti." },
-            { id: 39, name: "Rina Marlina", wa: "0812-7777-7777", rating: 4.6, photo: "assets/RinaMarlina.jpg", review: "Profesional." },
-            { id: 40, name: "Robi Kurniawan", wa: "0812-1234-8966", rating: 4.7, photo: "assets/RobiKurniawan.jpg", review: "Kerja Rapi." },
-            { id: 41, name: "Saputri", wa: "0895-392-8995", rating: 4.6, photo: "assets/Saputri.jpg", review: "Sangat jujur dan sopan." },
-            { id: 42, name: "Sarah Amelia", wa: "0890-3595-5000", rating: 4.9, photo: "assets/SarahAmelia.jpg", review: "Profesional dan rapi." },
-            { id: 43, name: "Stefani Wijaya", wa: "0895-0010-5002", rating: 4.8, photo: "assets/ElinaNatalia.jpg", review: "Sangat jujur dan sopan." },
-            { id: 44, name: "Team Cleaning + laundry", wa: "0895-1011-5102", rating: 4.8, photo: "assets/teamclean+laundry.jpg", review: "Hasil Sesuai Ekspektasi." },
-            { id: 45, name: "Team Setrika dan Pel", wa: "0895-1102-5672", rating: 4.9, photo: "assets/TeamSetrikadanPel.jpg", review: "Sangat jujur dan sopan." },
-            { id: 46, name: "Team Setrika dan Pel", wa: "0895-1102-5672", rating: 4.9, photo: "assets/TeamSertrikadanPel.jpg", review: "Sangat jujur dan sopan." },
-            { id: 47, name: "Teguh Santika", wa: "0895-2345-6000", rating: 4.6, photo: "assets/TeguhSantika.jpg", review: "Profesional dan wangi." },
-            { id: 48, name: "Wahyu Purwanti", wa: "0885-3005-2567", rating: 4.7, photo: "assets/WahyuPurwanti.jpg", review: "Bersih dan wangi." },
-            { id: 49, name: "Yoga Prasetyo", wa: "0890-1234-4567", rating: 4.9, photo: "assets/YogaPrasetyo.jpg", review: "Jujur dan sopan." },
-            { id: 50, name: "Yuni Lestari", wa: "0878-9868-5432", rating: 4.6, photo: "assets/YuniLestari.jpg", review: "Profesional dan telaten." },
-            { id: 51, name: "Yusuf Ramli", wa: "0855-4658-9925", rating: 4.8, photo: "assets/YusufRamli.jpg", review: "Bersih, rapi dan wangi." }
+            { id: 1, name: "Andi Pratama", wa: "0812-3344-5566", rating: 4.9, photo: "assets/pembantu1.jpg", review: "Sangat teliti & rapi kerjanya.", skills: ["deep_clean", "sapu_pel", "laundry"] },
+            { id: 2, name: "Budi Santosa", wa: "0877-1122-3344", rating: 4.8, photo: "assets/pembantu2.jpg", review: "Sangat jujur dan sopan.", skills: ["sapu_pel", "toilet", "setrika"] },
+            { id: 3, name: "Rizky Maulana", wa: "0812-3344-4477", rating: 4.5, photo: "assets/pembantu11.jpg", review: "Sangat kompeten dan telaten.", skills: ["deep_clean", "toilet", "cuci_ac"] },
+            { id: 4, name: "Agus Firmansyah", wa: "0812-3344-9876", rating: 4.6, photo: "assets/pembantu12.jpg", review: "Kerja cepat dan rumah jadi bersih.", skills: ["laundry", "setrika", "sapu_pel"] },
+            { id: 5, name: "Deni Kurniawam", wa: "0812-3344-5557", rating: 4.9, photo: "assets/pembantu13.jpg", review: "Kerja sopan dan detail.", skills: ["toilet", "taman", "fogging"] },
+            { id: 6, name: "Siti Aisyah", wa: "0812-3345-5766", rating: 4.8, photo: "assets/SitiAisyah.jpg", review: "Teliti dan rapi sampai detail kecil.", skills: ["deep_clean", "laundry", "setrika"] },
+            { id: 7, name: "Dewi Lestari", wa: "0812-2244-5786", rating: 4.9, photo: "assets/DewiLestari.png", review: "Kamar Mandi jadi kinclong.", skills: ["toilet", "dapur", "sapu_pel"] },
+            { id: 8, name: "Nurul Hidayah", wa: "0812-3111-4326", rating: 4.8, photo: "assets/pembantu5.jpg", review: "bersih menyeluruh dan wangi.", skills: ["deep_clean", "sapu_pel", "toilet"] },
+            { id: 9, name: "Putri Ananda", wa: "0812-3221-5746", rating: 4.9, photo: "assets/pembantu6.jpg", review: "sangat detail dan telaten.", skills: ["laundry", "setrika"] },
+            { id: 10, name: "Rina Marlina", wa: "0812-3232-8966", rating: 4.7, photo: "assets/pembantu7.jpg", review: "Hasil bersih maksimal.", skills: ["sapu_pel", "taman", "fogging"] },
+            { id: 11, name: "Adi Nugraha", wa: "0881-3882-8956", rating: 4.9, photo: "assets/AdiNugraha.jpg", review: "Kerja cepat dan sangat bersih.", skills: ["cuci_ac", "deep_clean"] },
+            { id: 12, name: "Aldy Firmansyah", wa: "0895-3890-9966", rating: 4.7, photo: "assets/AldyFirmansyah.jpg", review: "Kerja rapi tanpa dipantau.", skills: ["setrika", "sapu_pel"] },
+            { id: 13, name: "Anisa Putri", wa: "0895-3890-9966", rating: 4.7, photo: "assets/AnisaPutri.jpg", review: "Pelayanan ramah dan sopan.", skills: ["deep_clean", "toilet"] },
+            { id: 14, name: "Ayu Permata", wa: "0885-8950-9614", rating: 4.9, photo: "assets/AyuPermata.jpg", review: "Bersih, rapi dan wangi.", skills: ["laundry", "setrika"] },
+            { id: 15, name: "Bayu Rahmadan", wa: "0895-3000-9998", rating: 4.7, photo: "assets/BayuRahmadan.jpg", review: "Rapi, secara detail dan telaten.", skills: ["cuci_ac", "fogging"] },
+            { id: 16, name: "Citra Puspita", wa: "0887-4590-7776", rating: 4.8, photo: "assets/CitraPuspita.jpg", review: "Pelayanan ramah dan rapi.", skills: ["laundry", "setrika"] },
+            { id: 17, name: "Clara Wijaya", wa: "0890-4050-2309", rating: 4.9, photo: "assets/ClaraWijaya.jpg", review: "Ramah, rapi dan wangi.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 18, name: "Dimas Saputro", wa: "0811-0000-7906", rating: 4.8, photo: "assets/DimasSaputro.jpg", review: "Teliti dan rapi.", skills: ["sapu_pel", "toilet"] },
+            { id: 19, name: "Dina Rahmawati", wa: "0880-3540-3450", rating: 4.6, photo: "assets/DinaRahmawati.jpg", review: "Sangat detail dan telaten.", skills: ["laundry", "setrika"] },
+            { id: 20, name: "Elina Natalia", wa: "0895-3390-0066", rating: 4.9, photo: "assets/ElinaNatalia.jpg", review: "Sangat jujur dan sopan.", skills: ["toilet", "dapur"] },
+            { id: 21, name: "Eliza Natalia", wa: "0847-5523-1411", rating: 4.8, photo: "assets/ElizaNatalia.jpg", review: "Profesional dan rapi.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 22, name: "Fitri Handayani", wa: "0885-6532-7485", rating: 4.8, photo: "assets/FitriaHandayani.jpg", review: "Hasil sesuai ekspektasi.", skills: ["laundry", "setrika"] },
+            { id: 23, name: "Haris Fadillah", wa: "0865-6932-4215", rating: 4.6, photo: "assets/HarisFadillah.jpg", review: "Cukup baik.", skills: ["sapu_pel", "toilet"] },
+            { id: 24, name: "Hendra Wijaya", wa: "0821-3652-1425", rating: 4.9, photo: "assets/HendraWijaya.jpg", review: "Deep cleaning sangat maksimal.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 25, name: "Imam Maulana", wa: "0836-9874-2547", rating: 4.6, photo: "assets/ImamMaulana.jpg", review: "Pelayanan oke.", skills: ["cuci_ac", "fogging"] },
+            { id: 26, name: "Joko Susilo", wa: "0814-3982-4561", rating: 4.8, photo: "assets/JokoSusilo.jpg", review: "Kerja Cepat.", skills: ["sapu_pel", "toilet"] },
+            { id: 27, name: "Kirana Ayu", wa: "0880-1122-3365", rating: 4.7, photo: "assets/KiranaAyu.jpg", review: "Telaten dan ramah.", skills: ["laundry", "setrika"] },
+            { id: 28, name: "Lilis Kartika", wa: "0888-5578-9999", rating: 4.9, photo: "assets/LilisKartika.jpg", review: "Deep cleaning terbaik.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 29, name: "Lina Oktaviani", wa: "0811-5555-1478", rating: 4.7, photo: "assets/LinaOktaviani.jpg", review: "Pelayanan sopan dan ramah.", skills: ["laundry", "setrika"] },
+            { id: 30, name: "Melati Purnomo", wa: "0866-2222-8888", rating: 4.8, photo: "assets/MelatiPurnomo.jpg", review: "Sangat bersih.", skills: ["sapu_pel", "toilet"] },
+            { id: 31, name: "Mutiara Putri", wa: "0812-3232-8976", rating: 4.8, photo: "assets/MutiaraPutri.jpg", review: "Kerja Cepat.", skills: ["laundry", "setrika"] },
+            { id: 32, name: "Nabila Zahra", wa: "0812-1112-8966", rating: 4.5, photo: "assets/NabilaZahra.jpg", review: "Profesional.", skills: ["sapu_pel", "toilet"] },
+            { id: 33, name: "Naufal Rizky", wa: "0812-3232-1966", rating: 4.7, photo: "assets/NaufalRizky.jpg", review: "Hasil Sesuai Ekspetasi.", skills: ["cuci_ac", "fogging"] },
+            { id: 34, name: "Nia Anggraini", wa: "0812-3232-1166", rating: 4.7, photo: "assets/NiaAnggraini.jpg", review: "Detail dan Rapi.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 35, name: "Nur Hidayah", wa: "0811-2232-8966", rating: 4.9, photo: "assets/NurHidayah.jpg", review: "Kerja Bersih.", skills: ["sapu_pel", "toilet"] },
+            { id: 36, name: "Purwanto", wa: "0812-7777-8966", rating: 4.7, photo: "assets/Purwanto.jpg", review: "Pelayanan Sangat Baik.", skills: ["laundry", "setrika"] },
+            { id: 37, name: "Rafi Akbar", wa: "0812-6666-8966", rating: 4.6, photo: "assets/RafiAkbar.jpg", review: "Cukup Rapi.", skills: ["sapu_pel", "toilet"] },
+            { id: 38, name: "Rahma Safitri", wa: "0812-7777-9999", rating: 4.8, photo: "assets/RahmaSafitri.jpg", review: "Sangat Teliti.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 39, name: "Rina Marlina", wa: "0812-7777-7777", rating: 4.6, photo: "assets/RinaMarlina.jpg", review: "Profesional.", skills: ["laundry", "setrika"] },
+            { id: 40, name: "Robi Kurniawan", wa: "0812-1234-8966", rating: 4.7, photo: "assets/RobiKurniawan.jpg", review: "Kerja Rapi.", skills: ["sapu_pel", "toilet"] },
+            { id: 41, name: "Saputri", wa: "0895-392-8995", rating: 4.6, photo: "assets/Saputri.jpg", review: "Sangat jujur dan sopan.", skills: ["laundry", "setrika"] },
+            { id: 42, name: "Sarah Amelia", wa: "0890-3595-5000", rating: 4.9, photo: "assets/SarahAmelia.jpg", review: "Profesional dan rapi.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 43, name: "Stefani Wijaya", wa: "0895-0010-5002", rating: 4.8, photo: "assets/StefaniWijaya.jpg", review: "Sangat jujur dan sopan.", skills: ["laundry", "setrika"] },
+            { id: 44, name: "Team Cleaning + laundry", wa: "0895-1011-5102", rating: 4.8, photo: "assets/teamclean+laundry.jpg", review: "Hasil Sesuai Ekspektasi.", skills: ["deep_clean", "laundry"] },
+            { id: 45, name: "Team Setrika dan Pel", wa: "0895-1102-5672", rating: 4.9, photo: "assets/TeamSetrikadanPel.jpg", review: "Sangat jujur dan sopan.", skills: ["setrika", "sapu_pel"] },
+            { id: 46, name: "Team AC dan Toilet", wa: "0895-1102-5673", rating: 4.8, photo: "assets/TeamACToilet.jpg", review: "Spesialis AC dan Toilet.", skills: ["cuci_ac", "toilet"] },
+            { id: 47, name: "Teguh Santika", wa: "0895-2345-6000", rating: 4.6, photo: "assets/TeguhSantika.jpg", review: "Profesional dan wangi.", skills: ["sapu_pel", "toilet"] },
+            { id: 48, name: "Wahyu Purwanti", wa: "0885-3005-2567", rating: 4.7, photo: "assets/WahyuPurwanti.jpg", review: "Bersih dan wangi.", skills: ["laundry", "setrika"] },
+            { id: 49, name: "Yoga Prasetyo", wa: "0890-1234-4567", rating: 4.9, photo: "assets/YogaPrasetyo.jpg", review: "Jujur dan sopan.", skills: ["deep_clean", "sapu_pel"] },
+            { id: 50, name: "Yuni Lestari", wa: "0878-9868-5432", rating: 4.6, photo: "assets/YuniLestari.jpg", review: "Profesional dan telaten.", skills: ["laundry", "setrika"] },
+            { id: 51, name: "Yusuf Ramli", wa: "0855-4658-9925", rating: 4.8, photo: "assets/YusufRamli.jpg", review: "Bersih, rapi dan wangi.", skills: ["sapu_pel", "toilet"] }
         ];
 
         let selectedService = "", currentPrice = 0, isBundling = false, ratingTargetId = null, curRateValue = 0;
 
+        // FUNGSI UTILITAS
+        function getSkillDisplayName(skill) {
+            const skillMap = {
+                "deep_clean": "Deep Clean",
+                "sapu_pel": "Sapu & Pel",
+                "toilet": "Toilet",
+                "laundry": "Laundry",
+                "setrika": "Setrika",
+                "cuci_ac": "Cuci AC",
+                "taman": "Taman",
+                "fogging": "Fogging",
+                "dapur": "Dapur"
+            };
+            return skillMap[skill] || skill;
+        }
+
+        function getWorkersByService(serviceName) {
+            const requiredSkills = serviceSkills[serviceName] || [];
+            
+            return workers.filter(worker => {
+                if (requiredSkills.length === 0) return true;
+                return requiredSkills.every(skill => worker.skills.includes(skill));
+            });
+        }
+
+        // FUNGSI SLIDER BARU
+        function initSlider() {
+            const slides = document.querySelectorAll('.banner-slide');
+            const indicators = document.querySelectorAll('.banner-indicator');
+            
+            // Atur interval untuk auto slide
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 4000);
+            
+            // Update indicators
+            updateIndicators();
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.banner-slide');
+            const indicators = document.querySelectorAll('.banner-indicator');
+            
+            // Nonaktifkan slide saat ini
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            // Pindah ke slide berikutnya
+            currentSlide = (currentSlide + 1) % slides.length;
+            
+            // Aktifkan slide baru
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.banner-slide');
+            const indicators = document.querySelectorAll('.banner-indicator');
+            
+            // Nonaktifkan slide saat ini
+            slides[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            // Pindah ke slide yang dipilih
+            currentSlide = index;
+            
+            // Aktifkan slide baru
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+            
+            // Reset interval
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                nextSlide();
+            }, 4000);
+        }
+
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.banner-indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // FUNGSI UTAMA
         window.onload = () => {
             applySavedPreferences();
             setTimeout(() => {
@@ -470,6 +1220,118 @@
             } else { alert("Login Gagal! Akun tidak ditemukan."); }
         };
 
+        // LAYANAN DAN PEKERJA
+        function openService(name, price, bundling) {
+            selectedService = name; 
+            currentPrice = price; 
+            isBundling = bundling;
+            
+            document.getElementById('selectedServiceTitle').innerText = name;
+            
+            // Dapatkan pekerja yang sesuai dengan layanan
+            const suitableWorkers = getWorkersByService(name);
+            
+            const list = document.getElementById('workerList');
+            
+            if (suitableWorkers.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="bi bi-people fs-1 text-muted"></i>
+                        <p class="mt-3 text-muted">Belum ada petugas tersedia untuk layanan ini.</p>
+                        <button class="btn btn-primary rounded-pill px-4" onclick="navigateTo('package')">
+                            Kembali ke Paket
+                        </button>
+                    </div>`;
+            } else {
+                list.innerHTML = suitableWorkers.map(w => `
+                    <div class="worker-card" onclick="openBooking(${w.id})">
+                        <img src="${w.photo}" class="worker-img">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold">${w.name}</div>
+                            <div class="small text-muted"><i class="bi bi-whatsapp"></i> ${w.wa}</div>
+                            <div class="small text-warning"><i class="bi bi-star-fill"></i> ${w.rating} 
+                                <span class="text-muted">"${w.review}"</span>
+                            </div>
+                            <div class="small text-success mb-1">
+                                <i class="bi bi-check-circle"></i> Keahlian: 
+                                ${w.skills.map(skill => getSkillDisplayName(skill)).join(", ")}
+                            </div>
+                            <div class="text-primary fw-bold">Rp ${price.toLocaleString()}</div>
+                        </div>
+                    </div>`).join('');
+            }
+            
+            navigateTo('service');
+        }
+
+        // FUNGSI BARU: Quick Order dari Halaman Paket
+        function quickOrder(name, price, bundling) {
+            selectedService = name;
+            currentPrice = price;
+            isBundling = bundling;
+            
+            // Dapatkan pekerja pertama yang sesuai
+            const suitableWorkers = getWorkersByService(name);
+            
+            if (suitableWorkers.length === 0) {
+                alert("Maaf, belum ada petugas tersedia untuk paket ini. Silakan pilih paket lain.");
+                return;
+            }
+            
+            // Ambil pekerja pertama yang sesuai
+            const firstWorker = suitableWorkers[0];
+            
+            // Set data untuk modal booking
+            document.getElementById('workerDetail').innerHTML = 
+                `<b>Layanan:</b> ${name}<br>
+                 <b>Petugas:</b> ${firstWorker.name}<br>
+                 <b>WhatsApp:</b> ${firstWorker.wa}<br>
+                 <b>Keahlian:</b> ${firstWorker.skills.map(skill => getSkillDisplayName(skill)).join(", ")}`;
+            
+            document.getElementById('bookAddressManual').value = addresses[0] || "";
+            document.getElementById('bookPromo').value = "0";
+            
+            if(isBundling) { 
+                document.getElementById('promoSection').classList.add('d-none'); 
+                document.getElementById('bundlingNotice').classList.remove('d-none'); 
+            } else { 
+                document.getElementById('promoSection').classList.remove('d-none'); 
+                document.getElementById('bundlingNotice').classList.add('d-none'); 
+            }
+            
+            updateTotalDisplay();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function openBooking(wid) {
+            const w = workers.find(x => x.id === wid);
+            document.getElementById('workerDetail').innerHTML = 
+                `<b>Layanan:</b> ${selectedService}<br>
+                 <b>Petugas:</b> ${w.name}<br>
+                 <b>WhatsApp:</b> ${w.wa}<br>
+                 <b>Keahlian:</b> ${w.skills.map(skill => getSkillDisplayName(skill)).join(", ")}`;
+            
+            document.getElementById('bookAddressManual').value = addresses[0] || ""; 
+            document.getElementById('bookPromo').value = "0";
+            
+            if(isBundling) { 
+                document.getElementById('promoSection').classList.add('d-none'); 
+                document.getElementById('bundlingNotice').classList.remove('d-none'); 
+            } else { 
+                document.getElementById('promoSection').classList.remove('d-none'); 
+                document.getElementById('bundlingNotice').classList.add('d-none'); 
+            }
+            
+            updateTotalDisplay();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function updateTotalDisplay() {
+            let promo = isBundling ? 0 : parseFloat(document.getElementById('bookPromo').value);
+            let total = currentPrice * (1 - promo);
+            document.getElementById('totalPriceDisplay').innerText = "Rp " + total.toLocaleString();
+        }
+
         // CHATBOT
         function toggleChat() { let w = document.getElementById('chatbot-window'); w.style.display = (w.style.display === 'flex' ? 'none' : 'flex'); }
         function sendChat() {
@@ -482,6 +1344,8 @@
             if(val.includes("promo")) res = "Voucher diskon 5% bisa digunakan dengan kode BERSIH5!";
             if(val.includes("harga")) res = "Harga layanan kami mulai dari Rp 35.000 per jam.";
             if(val.includes("halo")) res = "Halo! Ada yang bisa kami bantu hari ini?";
+            if(val.includes("bayar") || val.includes("pembayaran")) res = "Kami menerima pembayaran via E-Wallet (DANA, GoPay, OVO, ShopeePay), QRIS, M-Banking (BCA, Mandiri, BRI, BNI), dan COD.";
+            if(val.includes("paket")) res = "Kami punya 5 paket bundling hemat: Deep Clean + Laundry, Setrika + Sapu Pel, Cuci AC + Toilet, Dapur + Kamar Mandi, dan Full House Clean.";
             setTimeout(() => {
                 content.innerHTML += `<div class="chat-bubble bot">${res}</div>`;
                 content.scrollTop = content.scrollHeight;
@@ -489,54 +1353,117 @@
             input.value = "";
         }
 
-        // BOOKING
-        function openService(name, price, bundling) {
-            selectedService = name; currentPrice = price; isBundling = bundling;
-            document.getElementById('selectedServiceTitle').innerText = name;
-            const list = document.getElementById('workerList');
-            list.innerHTML = workers.map(w => `
-                <div class="worker-card" onclick="openBooking(${w.id})">
-                    <img src="${w.photo}" class="worker-img">
-                    <div class="flex-grow-1">
-                        <div class="fw-bold">${w.name}</div>
-                        <div class="small text-muted"><i class="bi bi-whatsapp"></i> ${w.wa}</div>
-                        <div class="small text-warning"><i class="bi bi-star-fill"></i> ${w.rating} <span class="text-muted">"${w.review}"</span></div>
-                        <div class="text-primary fw-bold">Rp ${price.toLocaleString()}</div>
-                    </div>
-                </div>`).join('');
-            navigateTo('service');
+        // PAYMENT METHODS
+        function proceedToPayment() {
+            if(!document.getElementById('bookDate').value || !document.getElementById('bookAddressManual').value) {
+                return alert("Mohon lengkapi jadwal dan alamat!");
+            }
+            
+            document.getElementById('paymentTotalDisplay').innerText = document.getElementById('totalPriceDisplay').innerText;
+            closeModal('bookingModal');
+            openPaymentModal();
         }
 
-        function openBooking(wid) {
-            const w = workers.find(x => x.id === wid);
-            document.getElementById('workerDetail').innerHTML = `<b>Layanan:</b> ${selectedService}<br><b>Petugas:</b> ${w.name}<br><b>WhatsApp:</b> ${w.wa}`;
-            document.getElementById('bookAddressManual').value = addresses[0] || ""; 
-            document.getElementById('bookPromo').value = "0";
-            if(isBundling) { document.getElementById('promoSection').classList.add('d-none'); document.getElementById('bundlingNotice').classList.remove('d-none'); }
-            else { document.getElementById('promoSection').classList.remove('d-none'); document.getElementById('bundlingNotice').classList.add('d-none'); }
-            updateTotalDisplay();
-            document.getElementById('bookingModal').classList.add('active');
+        function openPaymentModal() {
+            selectedPaymentMethod = '';
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+            document.getElementById('paymentBtn').disabled = true;
+            document.getElementById('paymentModal').classList.add('active');
         }
 
-        function updateTotalDisplay() {
-            let promo = isBundling ? 0 : parseFloat(document.getElementById('bookPromo').value);
-            let total = currentPrice * (1 - promo);
-            document.getElementById('totalPriceDisplay').innerText = "Rp " + total.toLocaleString();
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('paymentBtn').disabled = false;
         }
 
-        function confirmOrder() {
-            if(!document.getElementById('bookDate').value || !document.getElementById('bookAddressManual').value) return alert("Mohon lengkapi jadwal dan alamat!");
-            transData.unshift({ id: Date.now(), service: selectedService, total: document.getElementById('totalPriceDisplay').innerText, date: document.getElementById('bookDate').value, status: "Selesai", rated: false });
+        function confirmPayment() {
+            if(!selectedPaymentMethod) {
+                return alert("Silakan pilih metode pembayaran!");
+            }
+
+            const paymentDetails = {
+                'dana': { name: 'DANA', type: 'e-wallet', color: '#0080FF' },
+                'gopay': { name: 'GoPay', type: 'e-wallet', color: '#00AA13' },
+                'ovo': { name: 'OVO', type: 'e-wallet', color: '#4C2A86' },
+                'shopeepay': { name: 'ShopeePay', type: 'e-wallet', color: '#EE4D2D' },
+                'qris': { name: 'QRIS', type: 'qris', color: '#24A4FF' },
+                'bca': { name: 'BCA Mobile', type: 'm-banking', color: '#0066B3' },
+                'mandiri': { name: 'Mandiri Online', type: 'm-banking', color: '#0033A0' },
+                'bri': { name: 'BRI Mobile', type: 'm-banking', color: '#0033A0' },
+                'bni': { name: 'BNI Mobile', type: 'm-banking', color: '#0083C9' },
+                'cod': { name: 'Cash On Delivery', type: 'cod', color: '#28a745' }
+            };
+
+            const paymentInfo = paymentDetails[selectedPaymentMethod];
+            
+            if (!paymentInfo) {
+                return alert("Metode pembayaran tidak valid!", "danger");
+            }
+
+            transData.unshift({ 
+                id: Date.now(), 
+                service: selectedService, 
+                total: document.getElementById('totalPriceDisplay').innerText, 
+                date: document.getElementById('bookDate').value, 
+                status: "Selesai", 
+                rated: false,
+                payment: paymentInfo.name,
+                paymentType: paymentInfo.type,
+                paymentColor: paymentInfo.color
+            });
+            
             localStorage.setItem('trans', JSON.stringify(transData));
-            closeModal('bookingModal'); showAlert('Pesanan Berhasil!','success'); navigateTo('transaction');
+            
+            let successMessage = '';
+            if (selectedPaymentMethod === 'cod') {
+                successMessage = 'Pesanan Berhasil! Bayar tunai saat petugas datang.';
+            } else if (paymentInfo.type === 'qris') {
+                successMessage = `Pesanan Berhasil! Scan QR Code ${paymentInfo.name} untuk pembayaran.`;
+            } else if (paymentInfo.type === 'e-wallet') {
+                successMessage = `Pesanan Berhasil! Bayar via ${paymentInfo.name}.`;
+            } else if (paymentInfo.type === 'm-banking') {
+                successMessage = `Pesanan Berhasil! Transfer via ${paymentInfo.name}.`;
+            }
+            
+            closeModal('paymentModal'); 
+            alert(successMessage);
+            navigateTo('transaction');
         }
 
         function renderTrans() {
             const list = document.getElementById('transList');
-            list.innerHTML = transData.length === 0 ? "<div class='text-center mt-5 text-muted'>Kosong</div>" : transData.map(t => `<div class="trans-card"><div class="d-flex justify-content-between mb-2"><strong class="text-primary">${t.service}</strong><span class="badge bg-success rounded-pill">Selesai</span></div><div class="small text-muted">${t.date}</div><div class="d-flex justify-content-between align-items-center mb-3 pt-2"><strong>${t.total}</strong>${!t.rated ? `<button class="btn btn-sm btn-primary rounded-pill px-4" onclick="openRating(${t.id})">Rating</button>` : `<span class="text-success small fw-bold">Selesai</span>`}</div></div>`).join('');
+            list.innerHTML = transData.length === 0 ? 
+                "<div class='text-center mt-5 text-muted'>Belum ada transaksi</div>" : 
+                transData.map(t => `
+                    <div class="trans-card">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <strong class="text-primary">${t.service}</strong>
+                                <div class="small text-muted">${t.date}</div>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Selesai</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="payment-badge" style="background: ${t.paymentColor || '#24A4FF'}">
+                                ${t.payment || 'Belum dipilih'}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                            <strong class="fs-5">${t.total}</strong>
+                            ${!t.rated ? 
+                                `<button class="btn btn-sm btn-primary rounded-pill px-4" onclick="openRating(${t.id})">Rating</button>` : 
+                                `<span class="text-success small fw-bold"><i class="bi bi-check-circle"></i> Sudah dirating</span>`
+                            }
+                        </div>
+                    </div>
+                `).join('');
         }
 
-        // PREFERENCES
+        // PENGATURAN PROFIL
         function updateProfileUI() {
             let u = JSON.parse(localStorage.getItem('user_data'));
             if(!u) return;
@@ -567,7 +1494,6 @@
         function showAlert(m, t) { const a = document.createElement('div'); a.className = `alert-custom bg-${t} text-white`; a.innerText = m; document.body.appendChild(a); setTimeout(() => a.remove(), 2500); }
         function handleLogout() { localStorage.removeItem('user_data'); location.reload(); }
         function saveNewAddress() { let input = document.getElementById('newAddrInput').value; if(!input) return; addresses.unshift(input); localStorage.setItem('addrs', JSON.stringify(addresses)); updateProfileUI(); }
-        function initSlider() { let cur = 0; const slides = document.querySelectorAll('.banner-slide'); setInterval(() => { if(slides.length){ slides[cur].classList.remove('active'); cur = (cur + 1) % slides.length; slides[cur].classList.add('active'); } }, 4000); }
     </script>
 </body>
 </html>
